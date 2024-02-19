@@ -10,7 +10,7 @@ class UserController
     {
         $user = new User();
         $users = $user->getAllUsers();
-
+        //ok 
         // Faites quelque chose avec les données récupérées, par exemple, affichez-les dans une vue
     }
 }
