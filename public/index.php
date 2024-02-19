@@ -4,6 +4,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use App\Controller\IndexController;
 use App\Controller\ProductController;
+use App\Controller\UserController;
 use App\Routing\Exception\RouteNotFoundException;
 use App\Routing\Route;
 use App\Routing\Router;
@@ -30,6 +31,21 @@ $router
     )
     ->addRoute(
         new Route('/products', 'products_list', 'GET', ProductController::class, 'list')
+    )
+    ->addRoute(
+        new Route('/users', 'index', 'GET', UserController::class, 'index')
+    )
+    ->addRoute(
+        new Route('/user/create', 'create', 'GET', UserController::class, 'create')
+    )
+    ->addRoute(
+        new Route('/user/register', 'register', 'POST', UserController::class, 'register')
+    )
+    ->addRoute(
+        new Route('/user/edit/{id}', 'edit_form', 'GET', UserController::class, 'edit')
+    )
+    ->addRoute(
+        new Route('/user/update/{id}', 'update', 'POST', UserController::class, 'update')
     );
 
 [
@@ -42,7 +58,7 @@ try {
 } catch (RouteNotFoundException) {
     http_response_code(404);
     echo "Page non trouvée";
-} catch (Exception) {
+} catch (Exception $e) {
     http_response_code(500);
-    echo "Erreur interne, veuillez contacter l'administrateur";
+    echo "Erreur interne : " . $e->getMessage();
 }

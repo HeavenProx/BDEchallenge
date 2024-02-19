@@ -19,7 +19,11 @@ class Router
     public function getRoute(string $uri, string $httpMethod): ?Route
     {
         foreach ($this->routes as $savedRoute) {
-            if ($savedRoute->getUri() === $uri && $savedRoute->getHttpMethod() === $httpMethod) {
+            // Utilisez une expression régulière pour faire correspondre l'URI
+            $pattern = $savedRoute->convertUriToRegex($savedRoute->getUri());
+            if (preg_match($pattern, $uri, $matches) && $savedRoute->getHttpMethod() === $httpMethod) {
+                // Ajoutez les correspondances en tant que paramètres
+                $savedRoute->setParameters(array_slice($matches, 1));
                 return $savedRoute;
             }
         }
@@ -45,7 +49,11 @@ class Router
 
         $controllerClass = $route->getControllerClass();
         $method = $route->getController();
+
+        // Extraire les paramètres de l'URL
+        $parameters = $route->extractParameters($uri);
+
         $controllerInstance = new $controllerClass();
-        return $controllerInstance->$method();
+        return $controllerInstance->$method(...$parameters);
     }
 }
