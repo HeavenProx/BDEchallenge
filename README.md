@@ -1,10 +1,22 @@
 # BDE Challenge Project - Science U
+***Authors : Mathis Enrici - Morgan Kpassi - Hugo Duperthuy***
 
 ## Configuration
 
+1. Get the project on you device
+2. Run
+```bash
+composer install
+```
+and 
+```bash
+composer start
+```
+
 ### Base de données
 
-Créer un fichier `config/db.ini` avec les informations suivantes (un modèle est disponible dans [`config/db.ini-template`](config/db.ini-template)) :
+Create your own database on phpmyadmin for example
+Create a file named `config/db.ini` and fill it with following informations (a template is available [`config/db.ini-template`](config/db.ini-template)) :
 
 ```ini
 DB_HOST="127.0.0.1"
