@@ -42,7 +42,7 @@
 <body>
     <h2 class="text-2xl font-bold mb-4">Inscription</h2>
 
-    <form action="/register" method="post" class="max-w-md mx-auto p-8 bg-white rounded-lg shadow-md">
+    <form action="/user/register" method="post" class="max-w-md mx-auto p-8 bg-white rounded-lg shadow-md">
         <label for="email" class="block mb-2 text-blue-900">E-mail:</label>
         <input type="email" id="email" name="email" required class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
 
