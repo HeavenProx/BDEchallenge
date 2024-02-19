@@ -7,30 +7,17 @@ use App\Controller\ProductController;
 use App\Routing\Exception\RouteNotFoundException;
 use App\Routing\Route;
 use App\Routing\Router;
-
-$dbConfig = parse_ini_file(__DIR__ . '/../config/db.ini');
-
-if ($dbConfig === false) {
-    echo "Fichier de configuration de la base de données introuvable, créez un fichier db.ini dans config/ (voir README)";
-    exit;
-}
-
-[
-    'DB_HOST'     => $host,
-    'DB_PORT'     => $port,
-    'DB_NAME'     => $dbName,
-    'DB_CHARSET'  => $charset,
-    'DB_USER'     => $user,
-    'DB_PASSWORD' => $password
-] = $dbConfig;
+use App\Database\DBConnector; // Importez la classe DBConnector
 
 try {
-    $dsn = "mysql:host=$host;port=$port;dbname=$dbName;charset=$charset";
-    $pdo = new PDO($dsn, $user, $password);
+    // Utilisez la classe DBConnector pour établir la connexion à la base de données
+    $dbConnector = new DBConnector();
+    $pdo = $dbConnector->getPDO();
 } catch (PDOException) {
     echo "Erreur lors de la connexion à la base de données";
     exit;
 }
+
 
 $router = new Router();
 
