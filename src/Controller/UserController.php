@@ -30,6 +30,9 @@ class UserController
             // Enregistrez l'utilisateur dans la base de données
             $userModel = new User();
             $userModel->createUser($email, $firstName, $lastName, $password);
+
+            header('Location: /users');
+            exit;
         }
      
         // Affichez le formulaire d'inscription
@@ -41,16 +44,16 @@ class UserController
         // Utilisez l'$id pour récupérer les informations de l'utilisateur à éditer
         $userModel = new User();
         $user = $userModel->getUserById($id);
-    
+
         // Passez les informations de l'utilisateur à la vue
         $viewPath = __DIR__ . '/../View/User/edit_form.php';
         ob_start();
         include $viewPath;
         $viewContent = ob_get_clean();
-    
+
         return $viewContent;
     }
-    
+
     public function update($id)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -58,13 +61,13 @@ class UserController
             $email = $_POST['email'] ?? '';
             $firstName = $_POST['first_name'] ?? '';
             $lastName = $_POST['last_name'] ?? '';
-        
+
             // Validez les données de mise à jour (ajoutez des validations supplémentaires selon vos besoins)
             // Mettez à jour les informations de l'utilisateur dans la base de données
             $userModel = new User();
             $userModel->updateUser($id, $email, $firstName, $lastName);
         }
-    
+
         // Affichez le formulaire de mise à jour
         echo 'Vos informations ont bien été mises à jour !';
     }
