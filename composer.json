@@ -28,6 +28,7 @@
         }
     },
     "require": {
-        "twig/twig": "^3.0"
+        "twig/twig": "^3.0",
+        "symfony/asset": "^7.0"
     }
 }

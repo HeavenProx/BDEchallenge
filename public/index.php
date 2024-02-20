@@ -43,13 +43,13 @@ $router
         new Route('/user/register', 'register', 'POST', UserController::class, 'register')
     )
     ->addRoute(
-        new Route('/user/edit/{id}', 'edit_form', 'GET', UserController::class, 'edit')
+        new Route('/user/edit/{id}', 'edit', 'GET', UserController::class, 'edit')
     )
     ->addRoute(
         new Route('/user/update/{id}', 'update', 'POST', UserController::class, 'update')
     )
     ->addRoute(
-        new Route('/css/{file}', 'styles', 'GET', AssetController::class, 'styles')
+        new Route('/img/{file}', 'images', 'GET', AssetController::class, 'images')
     );
 
 [
