@@ -47,15 +47,25 @@ class AuthenticationController {
         </body>
         </html>
         ';
-
-        $contentWithId = str_replace('CURRENT_ID', $userModel, $content);
+        $id = $userModel->getUserId($_POST['email']);
+        $contentWithId = str_replace('CURRENT_ID', strval(reset($id)), $content);
         
         //Send a confirmation mail
         $mailController = new MailController();
-        $mailController->sendMail('beebdechallenge@gmail.com', 'BEEDE', $_POST['email'], $_POST['first_name'] . $_POST['last_name'], 'Confirmation de compte', 'Votre compte a été créé avec succès !');
+        $mailController->sendMail('beebdechallenge@gmail.com', 'BEEDE', $_POST['email'], $_POST['first_name'] . $_POST['last_name'], 'Confirmation de compte', $contentWithId);
 
 
         $viewPath = __DIR__ . '/../View/Authentication/registered.php';
+        $viewContent = file_get_contents($viewPath);
+        return $viewContent;
+    }
+
+    public function confirmation(){
+        $id = $_GET['id'];
+        $userModel = new User();
+        $userModel->updateVerification($id);
+
+        $viewPath = __DIR__ . '/../View/Authentication/confirmation.php';
         $viewContent = file_get_contents($viewPath);
         return $viewContent;
     }

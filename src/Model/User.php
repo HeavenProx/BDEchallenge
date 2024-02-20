@@ -76,4 +76,17 @@ class User extends BaseModel
 
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
+
+    public function getUserId($userEmail)
+    {
+        $stmt = $this->db->prepare("SELECT userNumber FROM User WHERE email = ?");
+        $stmt->execute([$userEmail]);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public function updateVerification($userId)
+    {
+        $stmt = $this->db->prepare("UPDATE User SET verified = 1 WHERE userNumber = ?");
+        $stmt->execute([$userId]);
+    }
 }
