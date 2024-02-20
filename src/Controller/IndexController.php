@@ -6,7 +6,10 @@ class IndexController
 {
     public function home(): string
     {
-        return $this->render('auth.html.twig');
+        ob_start();
+        require 'src/View/Home/index.php';
+        $content = ob_get_clean();
+        return $content;
     }
 
     public function contact(): string
