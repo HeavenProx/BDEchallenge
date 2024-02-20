@@ -5,6 +5,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use App\Controller\IndexController;
 use App\Controller\ProductController;
 use App\Controller\UserController;
+use App\Controller\AuthenticationController;
 use App\Routing\Exception\RouteNotFoundException;
 use App\Routing\Route;
 use App\Routing\Router;
@@ -25,6 +26,15 @@ $router = new Router();
 $router
     ->addRoute(
         new Route('/', 'home', 'GET', IndexController::class, 'home')
+    )
+    ->addRoute(
+        new Route('/register', 'uregister', 'GET', AuthenticationController::class, 'register')
+    )
+    ->addRoute(
+        new Route('/registered', 'uregistered', 'POST', AuthenticationController::class, 'registered')
+    )
+    ->addRoute(
+        new Route('/login', 'login', 'GET', IndexController::class, 'login')
     )
     ->addRoute(
         new Route('/contact', 'contact', 'GET', IndexController::class, 'contact')
