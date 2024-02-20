@@ -63,8 +63,11 @@ $router
     )
     ->addRoute(
         new Route('/img/{file}', 'images', 'GET', AssetController::class, 'images')
+    )
+    ->addRoute(
+        new Route('/events', 'events', 'GET', EventController::class, 'index')
     );
-
+    
 [
     'REQUEST_URI'    => $uri,
     'REQUEST_METHOD' => $httpMethod
