@@ -62,7 +62,10 @@ $router
         new Route('/user/update/{id}', 'update', 'POST', UserController::class, 'update')
     )
     ->addRoute(
-        new Route('/css/{file}', 'styles', 'GET', AssetController::class, 'styles')
+        new Route('/user/delete/{id}', 'delete', 'GET', UserController::class, 'delete')
+    )
+    ->addRoute(
+        new Route('/img/{file}', 'images', 'GET', AssetController::class, 'images')
     );
 
 [
@@ -72,9 +75,9 @@ $router
 
 try {
     echo $router->execute($uri, $httpMethod);
-} catch (RouteNotFoundException) {
+} catch (RouteNotFoundException $e) {
     http_response_code(404);
-    echo "Page non trouvée";
+    echo "Page non trouvée". $e->getMessage();
 } catch (Exception $e) {
     http_response_code(500);
     echo "Erreur interne : " . $e->getMessage();

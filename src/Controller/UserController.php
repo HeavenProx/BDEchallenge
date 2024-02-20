@@ -79,6 +79,16 @@ class UserController
         }
     }
 
+    public function delete($id)
+    {
+        // Utilisez l'$id pour supprimer l'utilisateur de la base de données
+        $userModel = new User();
+        $userModel->deleteUser($id);
+        // var_dump($userModel);
+        // Redirigez l'utilisateur vers la liste des utilisateurs ou effectuez toute autre action souhaitée
+        header('Location: /users');
+        exit;
+    }
     public function index()
     {
         $user = new User();

@@ -1,14 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="public/css/all.css">
+    <style>
+        <?php
+        //fait avec Audrey HOSSEPIAN = patch par rapport à l'incompréhension du MVC custom du cours PHP
+         require( __DIR__. "../../../../public/css/bootstrap.css");
+         require( __DIR__. "../../../../public/css/base.css");
+         require( __DIR__. "../../../../public/css/style.css");
+         //décommenter si utilisation de fontawesome
+         //require( __DIR__. "../../../../public/css/all.css");
+         ?>
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
     <title>BDE</title>
 </head>
 
@@ -20,8 +28,8 @@
 
             <div class="listMenu">
                 <ul>
-                    <li><button class="btn border">Se connecter</button></li>
-                    <li><button class="btn border"> <a href="/register">S'inscrire</a></button></li>
+                    <li><button class="btn border"><a href="">Se connecter</a></button></li>
+                    <li><button class="btn border"> <a href="">S'inscrire</a></button></li>
                 </ul>
             </div>
         </nav>
@@ -45,7 +53,7 @@
 
         <section class="containerConcept container-fluid">
             <article class="articleConcept row">
-                <img src="../../public/assets/concert.png" class="col-md-6 col-12 p-0">
+                <img src="img/concert.png" class="col-md-6 col-12 p-0">
                 <div class="texteConcept col-md-6 col-12 p-0">
                     <div class="texteInt">
                         <h4 class="cherry">Les concerts</h4>
