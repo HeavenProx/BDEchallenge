@@ -5,6 +5,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use App\Controller\IndexController;
 use App\Controller\ProductController;
 use App\Controller\UserController;
+use App\Controller\AssetController;
 use App\Controller\AuthenticationController;
 use App\Routing\Exception\RouteNotFoundException;
 use App\Routing\Route;
@@ -52,10 +53,13 @@ $router
         new Route('/user/register', 'register', 'POST', UserController::class, 'register')
     )
     ->addRoute(
-        new Route('/user/edit/{id}', 'edit_form', 'GET', UserController::class, 'edit')
+        new Route('/user/edit/{id}', 'edit', 'GET', UserController::class, 'edit')
     )
     ->addRoute(
         new Route('/user/update/{id}', 'update', 'POST', UserController::class, 'update')
+    )
+    ->addRoute(
+        new Route('/css/{file}', 'styles', 'GET', AssetController::class, 'styles')
     );
 
 [

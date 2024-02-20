@@ -54,6 +54,6 @@ class Router
         $parameters = $route->extractParameters($uri);
 
         $controllerInstance = new $controllerClass();
-        return $controllerInstance->$method(...$parameters);
+        return $controllerInstance->$method($parameters);
     }
 }

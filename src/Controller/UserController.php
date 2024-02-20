@@ -41,12 +41,17 @@ class UserController
 
     public function edit($id)
     {
-        // Utilisez l'$id pour récupérer les informations de l'utilisateur à éditer
         $userModel = new User();
         $user = $userModel->getUserById($id);
 
-        // Passez les informations de l'utilisateur à la vue
-        $viewPath = __DIR__ . '/../View/User/edit_form.php';
+        // Vérifiez si l'utilisateur est trouvé
+        if ($user === false) {
+            // Faites quelque chose en cas d'utilisateur non trouvé, par exemple, redirigez l'utilisateur
+            // header('Location: /not_found');
+            // exit;
+        }
+
+        $viewPath = __DIR__ . '/../View/User/edit.php';
         ob_start();
         include $viewPath;
         $viewContent = ob_get_clean();
@@ -61,15 +66,17 @@ class UserController
             $email = $_POST['email'] ?? '';
             $firstName = $_POST['first_name'] ?? '';
             $lastName = $_POST['last_name'] ?? '';
+            $password = $_POST['password'] ?? '';
+            $role = $_POST['role'] ?? '';
 
-            // Validez les données de mise à jour (ajoutez des validations supplémentaires selon vos besoins)
-            // Mettez à jour les informations de l'utilisateur dans la base de données
+            // var_dump($email, $firstName, $lastName, $password);
             $userModel = new User();
-            $userModel->updateUser($id, $email, $firstName, $lastName);
+            // var_dump($userModel);
+            $userModel->updateUser($id, $email, $firstName, $lastName, $password, $role);
+            // var_dump($userModel);
+            header('Location: /users');
+            exit;
         }
-
-        // Affichez le formulaire de mise à jour
-        echo 'Vos informations ont bien été mises à jour !';
     }
 
     public function index()
