@@ -131,12 +131,13 @@ main .apropos h3 {
   background: #082b43;
   color: white;
   padding: 40px 0;
+  width: 100%;
 }
 .containerEvents h2 {
-  padding: 20px 0;
+  padding: 0px 0;
   font-size: 50px;
 }
-.containerEvents div {
+.containerEvents div div {
   margin: 0 30px;
   padding: 25px;
   border: 1px solid white;
@@ -166,7 +167,7 @@ footer div {
   header .listMenu li {
     padding: 7px 15px;
   }
-  .containerConcept .articleConcept:nth-child(1) {
+  .containerConcept .articleConcept:nth-child(2) img {
     order: -1;
   }
 

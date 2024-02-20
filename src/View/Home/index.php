@@ -43,7 +43,7 @@
             </article>
         </section>
 
-        <section class="containerConcept" id="containerConcept">
+        <section class="containerConcept container-fluid">
             <article class="articleConcept row">
                 <img src="img/concert.png" class="col-md-6 col-12 p-0">
                 <div class="texteConcept col-md-6 col-12 p-0">
@@ -56,7 +56,7 @@
                 </div>
             </article>
             <article class="articleConcept row">
-                <div class="texteConcept col-md-6 col- p-0">
+                <div class="texteConcept col-md-6 col-12 p-0">
                     <div class="texteInt">
                         <h4 class="cherry">Ciné Vibes</h4>
                         <p>Attendez-vous à des soirées ciné au top, avec Beede qui rend la magie du grand écran
@@ -79,40 +79,45 @@
             </article>
         </section>
 
-        <section class="containerEvents" class="container my-4">
-            <h2 class="text-center cherry">Nos Evènements</h2>
-            <ul class="row list-unstyled d-flex text-center ">
-                <li class="col-lg-4 col-md-12 py-4">
-                    <div>
-                        <!--<img src="img/" class="mb-4" alt="faits maison"> -->
-                        <h3 class="fw-bold">Soirée d'intégration</h3>
-                        <p>Ipsum qui adipisicing quis mollit nostrud laboris dolore.</p>
-                    </div>
-                </li>
-                <li class="col-lg-4 col-md-12 py-4">
-                    <div>
-                        <!--<img src="img/" class="mb-4" alt="produits frais"> -->
-                        <h3 class="fw-bold">Soirée Halloween</h3>
-                        <p>Ipsum qui adipisicing quis mollit nostrud laboris dolore.</p>
-                    </div>
-                </li>
-                <li class="col-lg-4 col-md-12 py-4">
-                    <div>
-                        <!--<img src="img/" class="mb-4" alt="bios et locaux"> -->
-                        <h3 class="fw-bold">Soirée Déguisé</h3>
-                        <p>Ipsum qui adipisicing quis mollit nostrud laboris dolore.</p>
-                    </div>
-                </li>
-            </ul>
+        <section class="containerEvents">
+            <div class="container">
+                <h2 class="text-center cherry">Nos Evènements</h2>
+                <ul class="row list-unstyled text-center ">
+                    <li class="col-lg-4 col-md-12 py-4">
+                        <div>
+                            <!--<img src="img/" class="mb-4" alt="faits maison"> -->
+                            <h3 class="fw-bold">Soirée d'intégration</h3>
+                            <p>Ipsum qui adipisicing quis mollit nostrud laboris dolore.</p>
+                        </div>
+                    </li>
+                    <li class="col-lg-4 col-md-12 py-4">
+                        <div>
+                            <!--<img src="img/" class="mb-4" alt="produits frais"> -->
+                            <h3 class="fw-bold">Soirée Halloween</h3>
+                            <p>Ipsum qui adipisicing quis mollit nostrud laboris dolore.</p>
+                        </div>
+                    </li>
+                    <li class="col-lg-4 col-md-12 py-4">
+                        <div>
+                            <!--<img src="img/" class="mb-4" alt="bios et locaux"> -->
+                            <h3 class="fw-bold">Soirée Déguisé</h3>
+                            <p>Ipsum qui adipisicing quis mollit nostrud laboris dolore.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+               
         </section>
 
     </main>
 
-    <footer class="row">
+    <footer>
+        <div class="row container">
         <div class="col-lg-6 col-md-12 px-5">Sciences-U Lyon</div>
         <div class="col-lg-6 col-md-12 px-5">53 Cr Albert Thomas, 69003 Lyon</div>
         <div class="col-lg-6 col-md-12 px-5">Sciences-u-lyon.fr</div>
         <div class="col-lg-6 col-md-12 px-5">04 26 29 01 01</div>
+        </div>
     </footer>
 
 </body>
