@@ -1,0 +1,220 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap");
+
+body {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.btn {
+  background-color: #082b43;
+  padding: 10px 15px;
+  color: white;
+  border-radius: 15px;
+}
+.btn:hover {
+  background-color: #0c3754;
+}
+
+.cherry {
+  font-family: "Cherry Bomb One", sans-serif;
+}
+
+main .infos .presentation img {
+  width: 48px;
+}
+
+/* Header */
+header {
+  background-image: linear-gradient(
+      rgba(124, 40, 99, 0.4) 20%,
+      rgba(0, 0, 0, 0.4)
+    ),
+    url("../img/concert_back.png");
+  background-position: top;
+  background-size: cover;
+  background-attachment: fixed;
+  width: 100%;
+  height: 100vh;
+  color: white;
+  padding: 0 0 20px 0;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #082b43;
+  width: 100%;
+  height: 120px;
+  color: white;
+  padding: 0 50px;
+}
+
+header div {
+  text-align: center;
+  margin: 150px 20px 250px 20px;
+}
+
+header .logo {
+  width: 110px;
+}
+
+header .listMenu {
+  float: right;
+  margin: 15px 20px 0;
+}
+header .listMenu li {
+  display: inline-block;
+  padding: 0 15px;
+}
+header .btn {
+  font-size: 15px;
+}
+
+h1 {
+  text-align: left;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 70px;
+  margin: 0 50px;
+  line-height: 100%;
+}
+header h2 {
+  font-size: 20px;
+  text-align: right;
+  margin: 170px 170px 0 0;
+  padding: 4px 10px;
+  border-right: 2px white solid;
+}
+
+/* A propos */
+main .apropos {
+  height: 100vh;
+  background-color: #fdc040;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  color: #4e5152;
+  padding: 20px;
+}
+
+main .apropos h2 {
+  font-size: 40px;
+}
+main .apropos h3 {
+  font-size: 50px;
+}
+
+/* containerConcept */
+.containerConcept .articleConcept .texteConcept {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.containerConcept .articleConcept .texteConcept div {
+  padding: 60px;
+}
+.containerConcept .articleConcept .texteConcept h4 {
+  font-size: 50px;
+  padding: 20px 0;
+}
+.containerConcept .articleConcept .texteConcept p {
+  font-size: 22px;
+}
+
+/* container events */
+.containerEvents {
+  background: #082b43;
+  color: white;
+  padding: 40px 0;
+}
+.containerEvents h2 {
+  padding: 20px 0;
+  font-size: 50px;
+}
+.containerEvents div {
+  margin: 0 30px;
+  padding: 25px;
+  border: 1px solid white;
+}
+
+/* footer */
+footer {
+  padding: 40px 0;
+  background: #fdc040;
+}
+footer div {
+  padding: 50px;
+}
+
+/* Responsive téléphone */
+@media screen and (max-width: 767px) {
+  header nav {
+    height: 150px;
+  }
+  h1 {
+    font-size: 40px;
+    margin: 0 10px;
+  }
+  header h2 {
+    margin: 150px 40px 0 40px;
+  }
+  header .listMenu li {
+    padding: 7px 15px;
+  }
+  .containerConcept .articleConcept:nth-child(1) {
+    order: -1;
+  }
+
+  main .apropos h2 {
+    font-size: 20px;
+  }
+  main .apropos h3 {
+    font-size: 30px;
+  }
+
+  main .sectionChallenge {
+    width: 90%;
+  }
+  main .sectionChallenge a {
+    width: 100%;
+  }
+
+  main .infos .presentation ul li {
+    width: 50%;
+  }
+
+  main .fitclub {
+    background: black;
+  }
+  main .fitclub .autrement {
+    width: 100%;
+    padding: 80px;
+  }
+  main .fitclub .autrement h2 {
+    margin-left: 0;
+  }
+
+  main .service ul li {
+    width: 100%;
+  }
+}
+
+/* Responsive tablette */
+@media screen and (max-width: 1220px) {
+  main .service ul li {
+    width: 50%;
+  }
+  main .service ul li:nth-of-type(2),
+  main .service ul li:nth-of-type(3),
+  main .service ul li:nth-of-type(6) {
+    background-color: white;
+  }
+  main .service ul li:nth-of-type(4) {
+    background-color: rgba(50, 50, 50, 0.1);
+  }
+}

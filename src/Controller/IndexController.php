@@ -6,7 +6,7 @@ class IndexController
 {
     public function home(): string
     {
-        return "Accueil";
+        return $this->render('auth.html.twig');
     }
 
     public function contact(): string

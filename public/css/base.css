@@ -1,0 +1,31 @@
+* {
+	box-sizing: border-box;
+	outline: none;
+	text-decoration: none;
+	transition: all .2s ease 0s;
+    /* Visualisation des éléments */
+    /*border: 1px dotted rgba(0,0,0,0.3);*/
+}
+
+*:hover {
+	transition: all .2s ease 0s;
+}
+
+html {font-size: 62.5%}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 1.6rem;
+    line-height: 1.6;
+}
+
+a, a:hover, a:visited, a:active {
+    text-decoration: none;
+    color:inherit
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+}
