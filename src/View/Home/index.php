@@ -29,7 +29,7 @@
             <div class="listMenu">
                 <ul>
                     <li><button class="btn border"><a href="">Se connecter</a></button></li>
-                    <li><button class="btn border"> <a href="">S'inscrire</a></button></li>
+                    <li> <a href="/register"><button class="btn border">S'inscrire</button></a></li>
                 </ul>
             </div>
         </nav>

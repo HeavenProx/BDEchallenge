@@ -86,7 +86,7 @@ class User extends BaseModel
 
     public function updateVerification($userId)
     {
-        $stmt = $this->db->prepare("UPDATE User SET verified = 1 WHERE userNumber = ?");
+        $stmt = $this->db->prepare("UPDATE User SET validated = 1 WHERE userNumber = ?");
         $stmt->execute([$userId]);
     }
 }
