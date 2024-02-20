@@ -16,7 +16,7 @@ class User extends BaseModel
         }
         // Insérer l'utilisateur dans la base de données
         $stmt = $this->db->prepare("INSERT INTO User (email, firstName, lastName, password, role) VALUES (?, ?, ?, ?, ?)");
-        $stmt->execute([$email, $firstName, $lastName, $hashedPassword, $role]);
+        $stmt->execute([$email, $firstName, $lastName, $hashedPassword, $roles]);
     }
 
     public function updateUser($userId, $email, $firstName, $lastName, $password, $defaultRole = 'Étudiant')
@@ -65,5 +65,18 @@ class User extends BaseModel
         $stmt->execute([$userId]);
 
         return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public function getUserId($userEmail)
+    {
+        $stmt = $this->db->prepare("SELECT userNumber FROM User WHERE email = ?");
+        $stmt->execute([$userEmail]);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public function updateVerification($userId)
+    {
+        $stmt = $this->db->prepare("UPDATE User SET verified = 1 WHERE userNumber = ?");
+        $stmt->execute([$userId]);
     }
 }
