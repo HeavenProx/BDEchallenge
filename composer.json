@@ -29,6 +29,6 @@
     },
     "require": {
         "twig/twig": "^3.0",
-        "symfony/asset": "^7.0"
+        "phpmailer/phpmailer": "^6.9"
     }
 }

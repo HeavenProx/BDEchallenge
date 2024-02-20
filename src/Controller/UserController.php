@@ -67,18 +67,16 @@ class UserController
             $firstName = $_POST['first_name'] ?? '';
             $lastName = $_POST['last_name'] ?? '';
             $password = $_POST['password'] ?? '';
+            $role = $_POST['role'] ?? '';
 
             // var_dump($email, $firstName, $lastName, $password);
             $userModel = new User();
             // var_dump($userModel);
-            $userModel->updateUser($id, $email, $firstName, $lastName, $password);
+            $userModel->updateUser($id, $email, $firstName, $lastName, $password, $role);
             // var_dump($userModel);
-            // header('Location: /users');
-            // exit;
+            header('Location: /users');
+            exit;
         }
-
-        // Affichez le formulaire de mise à jour
-        echo 'Vos informations ont bien été mises à jour !';
     }
 
     public function index()

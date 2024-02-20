@@ -27,6 +27,13 @@
                 <label for="password" class="block mb-2 text-blue-900">Mot de passe:</label>
                 <input type="password" id="password" name="password" value="<?php echo $user['password']; ?>" class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
 
+                <label for="role" class="block mb-2 text-blue-900">Role</label>
+                <select id="role" name="role" class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
+                    <option value="Etudiant" <?php echo ($user['role'] === 'Etudiant') ? 'selected' : ''; ?>>Étudiant</option>
+                    <option value="BDE" <?php echo ($user['role'] === 'BDE') ? 'selected' : ''; ?>>BDE</option>
+                    <option value="Admin" <?php echo ($user['role'] === 'Admin') ? 'selected' : ''; ?>>Admin</option>
+                </select>
+
                 <!-- Ajoutez d'autres champs de formulaire si nécessaire -->
 
                 <button type="submit" class="bg-yellow-500 text-blue-900 px-6 py-3 rounded-md cursor-pointer hover:bg-yellow-400">Mettre à jour</button>

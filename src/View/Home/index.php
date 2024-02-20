@@ -26,7 +26,7 @@
             <div class="listMenu">
                 <ul>
                     <li><button class="btn border">Se connecter</button></li>
-                    <li><button class="btn border">S'inscrire</button></li>
+                    <li><button class="btn border"> <a href="/register">S'inscrire</a></button></li>
                 </ul>
             </div>
         </nav>
@@ -50,7 +50,7 @@
 
         <section class="containerConcept container-fluid">
             <article class="articleConcept row">
-                <img src="img/concert.png" class="col-md-6 col-12 p-0">
+                <img src="../../public/assets/concert.png" class="col-md-6 col-12 p-0">
                 <div class="texteConcept col-md-6 col-12 p-0">
                     <div class="texteInt">
                         <h4 class="cherry">Les concerts</h4>
