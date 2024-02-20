@@ -38,7 +38,17 @@ class User extends BaseModel
 
     }
 
+    public function deleteUser($userId)
+    {
+        // Mettez en œuvre la logique pour supprimer l'utilisateur de la base de données
+        $stmt = $this->db->prepare("DELETE FROM User WHERE userNumber = ?");
+        if (!$stmt) {
+            die("Error in DELETE statement: " . print_r($this->db->errorInfo(), true));
+        }
+        $userId = is_array($userId) ? reset($userId) : $userId;
 
+        $stmt->execute([$userId]);
+    }
 
     public function getAllUsers()
     {

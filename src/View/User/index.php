@@ -56,11 +56,16 @@
                 <p class="text-xl font-semibold mb-2 text-gray-600"><?php echo $user['firstName'] . ' ' . $user['lastName']; ?></p>
                 <p class="text-gray-600"><?php echo $user['email']; ?></p>
                 <?php echo $user['userNumber']; ?>
+
                 <!-- Ajoutez d'autres informations d'utilisateur si nécessaire -->
                 <a href="/user/edit/<?php echo $user['userNumber']; ?>" class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Edit</a>
+                
+                <!-- Bouton de suppression -->
+                <a href="/user/delete/<?php echo $user['userNumber']; ?>" class="bg-red-900 text-white hover:bg-blue-500 hover:text-white transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Delete</a>
             </li>
         <?php endforeach; ?>
     </ul>
+
 </div>
 
 
