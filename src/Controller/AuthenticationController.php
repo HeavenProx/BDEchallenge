@@ -43,7 +43,7 @@ class AuthenticationController {
         <body>
             <h1>Confirmation de compte</h1>
             <p>Merci de vous être inscrit! Cliquez sur le lien ci-dessous pour valider votre compte :</p>
-            <a href="http://localhost:8000/confirmation?id=CURRENT_ID">Valider mon compte</a>
+            <a href="http://localhost:8000/confirmation/CURRENT_ID">Valider mon compte</a>
         </body>
         </html>
         ';
@@ -60,8 +60,8 @@ class AuthenticationController {
         return $viewContent;
     }
 
-    public function confirmation(){
-        $id = $_GET['id'];
+    public function confirmation($id){
+        $id = intval($id[0]);
         $userModel = new User();
         $userModel->updateVerification($id);
 
