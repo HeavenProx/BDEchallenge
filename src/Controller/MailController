@@ -1,0 +1,11 @@
+<?php
+
+namespace App\Controller;
+
+class MailController
+{
+    public function SendMail()
+    {
+        
+    }
+}
