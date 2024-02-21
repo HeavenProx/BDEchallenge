@@ -47,16 +47,37 @@
     <div class="flex justify-between mb-6">
         <h1 class="text-3xl font-semibold mb-4 text-white">Liste des évévenements</h1>
         <div>
-            <a href="/event/create" class="bg-yellow-500 text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4 ml-4">Filtrer par catégorie</a>
-        </div>
-        <div>
         <a href="/" class="bg-yellow-500 text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4 ml-4">Accueil</a> 
         <a href="/event/create" class="bg-yellow-500 text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4 ml-4">Ajouter Event</a>    
     </div>
-    </div>
+</div>
+<div class="container mx-auto">
+    <form action="/events" class="flex gap-4 my-8 items-center">
+        <div class="flex flex-col gap-1">
+            <label for="category" class="block mb-2 text-blue-900">Catégorie :</label>
+            <select id="category" name="category" class="text-blue-900 w-full px-4 py-3 mb-4 border rounded-md">
+                <option value="All">Toutes les catégories</option>
+                <option value="Soiree">Soirée</option>
+                <option value="Concert">Concert</option>
+                <option value="Cinema">Cinéma</option>
+            </select>
+        </div>
+        
+        <div class="flex flex-col gap-1">
+            <label for="date" class="block mb-2 text-blue-900">Date :</label>
+            <input value="<?php echo date('Y-m-d') ?>" type="date" id="date" name="date" class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
+        </div>
+        
+        <div class="flex items-end">
+            <button type="submit" class="bg-yellow-500 text-blue-900 px-6 py-3 rounded-md cursor-pointer h-1/3 mt-4">Filtrer</button>
+        </div>
+        
+    </form>
+</div>
+
 
     <!-- Affichage des utilisateurs -->
-    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <ul id="events-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <?php foreach ($events as $event): ?>
             <li class="bg-white p-4 rounded shadow">
                 <p class="text-xl font-bold mb-2 text-gray-800"><?php echo $event['name'] . ' - ' . $event['eventDate']; ?></p>
@@ -72,6 +93,8 @@
         <?php endforeach; ?>
     </ul>
 
+    <a href="/events/prevp" class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Page précédente</a>
+    <a href="/events/nextp" class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Page suivante</a>
 </div>
 
 

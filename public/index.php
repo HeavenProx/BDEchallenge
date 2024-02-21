@@ -91,6 +91,12 @@ $router
         new Route('/events', 'events', 'GET', EventController::class, 'index')
     )
     ->addRoute(
+        new Route('/events/prevp', 'prevp', 'GET', EventController::class, 'prevp')
+    )
+    ->addRoute(
+        new Route('/events/nextp', 'nextp', 'GET', EventController::class, 'nextp')
+    )
+    ->addRoute(
         new Route('/event/create', 'create', 'GET', EventController::class, 'create')
     )
     ->addRoute(
@@ -107,7 +113,7 @@ $router
     );
     
 [
-    'REQUEST_URI'    => $uri,
+    'PATH_INFO'    => $uri,
     'REQUEST_METHOD' => $httpMethod
 ] = $_SERVER;
 
