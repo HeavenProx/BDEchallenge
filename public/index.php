@@ -3,15 +3,17 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use App\Controller\IndexController;
-use App\Controller\ProductController;
 use App\Controller\UserController;
-use App\Controller\EventController;
 use App\Controller\AssetController;
 use App\Controller\AuthenticationController;
+use App\Controller\EventController;
 use App\Routing\Exception\RouteNotFoundException;
 use App\Routing\Route;
 use App\Routing\Router;
 use App\Database\DBConnector; // Importez la classe DBConnector
+
+session_start();
+// $_SESSION['logged'] = false;
 
 try {
     // Utilisez la classe DBConnector pour établir la connexion à la base de données
@@ -41,19 +43,26 @@ $router
         new Route('/confirmation/{id}', 'confirmation', 'GET', AuthenticationController::class, 'confirmation')
     )
     ->addRoute(
-        new Route('/login', 'login', 'GET', IndexController::class, 'login')
+        new Route('/login', 'login', 'GET', AuthenticationController::class, 'login')
     )
 
     // Nous contacter
    ->addRoute(
-        new Route('/contact', 'contact', 'GET', IndexController::class, 'contact')
+        new Route('/checklogs', 'checklogs', 'POST', AuthenticationController::class, 'checklogs')
     )
     ->addRoute(
         new Route('/contact/send', 'send', 'POST', IndexController::class, 'send')
     )
     
     ->addRoute(
-        new Route('/products', 'products_list', 'GET', ProductController::class, 'list')
+        new Route('/logout', 'logout', 'GET', AuthenticationController::class, 'logout')
+    )
+
+    ->addRoute(
+        new Route('/checklogs', 'checklogs', 'POST', AuthenticationController::class, 'checklogs')
+    )
+    ->addRoute(
+        new Route('/logout', 'logout', 'GET', AuthenticationController::class, 'logout')
     )
 
     // Route User

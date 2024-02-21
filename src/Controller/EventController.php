@@ -82,14 +82,6 @@ class EventController
             $location = $_POST['location'] ?? '';
             $description = $_POST['description'] ?? '';
 
-            //var_dump($name, $category, $eventDate, $location, $description);
-            // Assurez-vous que les champs requis ne sont pas vides
-            if (empty($name) || empty($category) || empty($eventDate) || empty($location) || empty($description)) {
-                // Faites quelque chose en cas de champ vide, par exemple, redirigez l'utilisateur avec un message d'erreur
-                //header('Location: /events?error=Champs vides');
-                //exit;
-            }
-
             // Appel de la méthode updateEvent du modèle
             $eventModel = new Event();
             $eventModel->updateEvent($id, $name, $category, $eventDate, $location, $description);
@@ -105,7 +97,6 @@ class EventController
         // Utilisez l'$id pour supprimer l'utilisateur de la base de données
         $eventModel = new Event();
         $eventModel->deleteEvent($id);
-        // var_dump($userModel);
         // Redirigez l'utilisateur vers la liste des utilisateurs ou effectuez toute autre action souhaitée
         header('Location: /events');
         exit;

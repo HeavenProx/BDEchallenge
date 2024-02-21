@@ -28,8 +28,14 @@
 
             <div class="listMenu">
                 <ul>
-                    <li><button class="btn border"><a href="">Se connecter</a></button></li>
-                    <li> <a href="/register"><button class="btn border">S'inscrire</button></a></li>
+                    
+                    <?php if(isset($_SESSION['logged']) && $_SESSION['logged'] == true): ?>
+                        <li><a href="/profile"><button class="btn border"><?php echo $_SESSION['user']['firstName'] . " " . $_SESSION['user']['lastName'] ?></button></a></li>
+                        <li><a href="/logout"><button class="btn border">Se déconnecter</button></a></li>
+                    <?php else: ?>
+                        <li><a href="/login"><button class="btn border">Se connecter</button></a></li>
+                        <li> <a href="/register"><button class="btn border">S'inscrire</button></a></li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </nav>

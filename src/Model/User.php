@@ -11,9 +11,7 @@ class User extends BaseModel
 
         // Par défaut, assigner le rôle spécifié (ou 'Étudiant' si aucun n'est spécifié)
         $roles = [$defaultRole];
-        if (is_array($roles)) {
-            $roles = reset($roles);
-        }
+        $roles = is_array($roles) ? reset($roles) : $roles;
         // Insérer l'utilisateur dans la base de données
         $stmt = $this->db->prepare("INSERT INTO User (email, firstName, lastName, password, role) VALUES (?, ?, ?, ?, ?)");
         $stmt->execute([$email, $firstName, $lastName, $hashedPassword, $roles]);

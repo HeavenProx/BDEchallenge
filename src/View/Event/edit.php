@@ -18,8 +18,11 @@
                 <label for="name" class="block mb-2 text-blue-900">Nom :</label>
                 <input type="text" id="name" name="name" value="<?php echo $event['name']; ?>" class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
 
-                <label for="category" class="block mb-2 text-blue-900">Categorie :</label>
-                <input type="text" id="category" name="category" value="<?php echo $event['category']; ?>" class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
+                <select id="category" name="category" class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
+                    <option value="Soiree" <?php echo ($event['category'] === 'Soiree') ? 'selected' : ''; ?>>Soirée</option>
+                    <option value="Concert" <?php echo ($event['category'] === 'Concert') ? 'selected' : ''; ?>>Concert</option>
+                    <option value="Cinema" <?php echo ($event['category'] === 'Cinema') ? 'selected' : ''; ?>>Cinéma</option>
+                </select>
 
                 <label for="eventDate" class="block mb-2 text-blue-900">Date :</label>
                 <input type="text" id="eventDate" name="eventDate" value="<?php echo $event['eventDate']; ?>" class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">

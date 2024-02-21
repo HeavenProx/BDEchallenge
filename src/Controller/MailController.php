@@ -17,8 +17,8 @@ class MailController
     $phpmailer->isSMTP();
     $phpmailer->Host = 'smtp.gmail.com';
     $phpmailer->SMTPAuth = true;
-    $phpmailer->Username = 'beebdechallenge@gmail.com'; // Votre adresse e-mail Gmail
-    $phpmailer->Password = 'arit ftwa rkxa ajzm'; // Votre mot de passe Gmail
+    $phpmailer->Username = 'mathis.enrici@gmail.com'; // Votre adresse e-mail Gmail
+    $phpmailer->Password = 'tahl yssl wlpb bctm'; // Votre mot de passe Gmail
     $phpmailer->SMTPSecure = 'tls';
     $phpmailer->Port = 587;
     

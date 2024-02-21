@@ -40,7 +40,7 @@
     </style>
 </head>
 <body>
-    <h2 class="text-2xl font-bold mb-4">Inscription</h2>
+    <h2 class="text-2xl font-bold mb-4 text-center mt-8">Inscription</h2>
 
     <form action="/registered" method="post" class="max-w-md mx-auto p-8 bg-white rounded-lg shadow-md">
         <label for="email" class="block mb-2 text-blue-900">E-mail:</label>
