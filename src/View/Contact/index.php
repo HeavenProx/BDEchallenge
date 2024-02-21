@@ -48,9 +48,18 @@
         <input type="text" id="objet" name="objet" required class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
 
         <label for="message" class="block mb-2 text-blue-900">Message :</label>
-        <input type="text" id="message" name="message" required class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
+        <input type="textarea" id="message" name="message" required class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
+
+        
+        <?php 
+            if (isset($_SESSION['error'])): 
+                echo '<h3 class="text-red-600">' . $_SESSION['error'] . '</h3>';
+                unset($_SESSION['error']); // Supprime la variable $_SESSION['error']
+            endif; 
+        ?>
 
         <button type="submit" class="bg-yellow-500 text-blue-900 px-6 py-3 rounded-md cursor-pointer hover:bg-yellow-400">Envoyer</button>
+
     </form>
 </body>
 </html>
