@@ -124,7 +124,7 @@
         <div class="col-lg-6 col-md-12 px-5">Sciences-U Lyon</div>
         <div class="col-lg-6 col-md-12 px-5">53 Cr Albert Thomas, 69003 Lyon</div>
         <div class="col-lg-6 col-md-12 px-5">Sciences-u-lyon.fr</div>
-        <div class="col-lg-6 col-md-12 px-5">04 26 29 01 01</div>
+        <div class="col-lg-6 col-md-12 px-5"><a href="/contact">Nous Contacter</a></div>
         </div>
     </footer>
 

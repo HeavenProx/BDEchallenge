@@ -29,6 +29,8 @@ $router
     ->addRoute(
         new Route('/', 'home', 'GET', IndexController::class, 'home')
     )
+
+    // Login et Register
     ->addRoute(
         new Route('/register', 'uregister', 'GET', AuthenticationController::class, 'register')
     )
@@ -41,9 +43,15 @@ $router
     ->addRoute(
         new Route('/login', 'login', 'GET', IndexController::class, 'login')
     )
-    ->addRoute(
+
+    // Nous contacter
+   ->addRoute(
         new Route('/contact', 'contact', 'GET', IndexController::class, 'contact')
     )
+    ->addRoute(
+        new Route('/contact/send', 'send', 'POST', IndexController::class, 'send')
+    )
+    
     ->addRoute(
         new Route('/products', 'products_list', 'GET', ProductController::class, 'list')
     )
