@@ -29,7 +29,7 @@
             <div class="listMenu">
                 <ul>
                     
-                    <?php if($_SESSION['logged'] == true): ?>
+                    <?php if(isset($_SESSION['logged']) && $_SESSION['logged'] == true): ?>
                         <li><a href="/logout"><button class="btn border"><?php echo $_SESSION['user']['firstName'] . " " . $_SESSION['user']['lastName'] ?></button></a></li>
                         <li><a href="/logout"><button class="btn border">Se déconnecter</button></a></li>
                     <?php else: ?>
