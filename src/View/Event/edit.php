@@ -25,7 +25,7 @@
                 </select>
 
                 <label for="eventDate" class="block mb-2 text-blue-900">Date :</label>
-                <input type="text" id="eventDate" name="eventDate" value="<?php echo $event['eventDate']; ?>" class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
+                <input type="date" id="eventDate" name="eventDate" value="<?php echo $event['eventDate']; ?>" class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
 
                 <label for="description" class="block mb-2 text-blue-900">Description :</label>
                 <input type="text" id="description" name="description" value="<?php echo $event['description']; ?>" class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">

@@ -73,10 +73,15 @@ class EventController
     }
 
     public function create(){
-        ob_start();
-        require 'src/View/Event/create.php';
-        $content = ob_get_clean();
-        return $content;
+        if(isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'BDE'){
+            ob_start();
+            require 'src/View/Event/create.php';
+            $content = ob_get_clean();
+            return $content;
+        } else{
+            $_SESSION['error'] = "Vous ne pouvez pas accedé à cette page";
+            header('Location: /');
+        }
     }
 
     public function register()
@@ -106,15 +111,9 @@ class EventController
 
     public function edit($id)
     {
+        if(isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'BDE'){
         $eventModel = new Event();
         $event = $eventModel->getEventById($id);
-
-        // Vérifiez si l'event est trouvé
-        if ($event === false) {
-            // Faites quelque chose en cas d'event non trouvé, par exemple, redirigez l'utilisateur
-            // header('Location: /not_found');
-            // exit;
-        }
 
         $viewPath = __DIR__ . '/../View/Event/edit.php';
         ob_start();
@@ -122,6 +121,10 @@ class EventController
         $viewContent = ob_get_clean();
 
         return $viewContent;
+        } else{
+            $_SESSION['error'] = "Vous ne pouvez pas accedé à cette page";
+            header('Location: /');
+        }
     }
 
     public function update($id)
@@ -146,12 +149,16 @@ class EventController
 
     public function delete($id)
     {
+        if(isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'BDE'){
         // Utilisez l'$id pour supprimer l'utilisateur de la base de données
         $eventModel = new Event();
         $eventModel->deleteEvent($id);
         // Redirigez l'utilisateur vers la liste des utilisateurs ou effectuez toute autre action souhaitée
         header('Location: /events');
-        exit;
+        } else{
+            $_SESSION['error'] = "Vous ne pouvez pas accedé à cette page";
+            header('Location: /');
+        }
     }
 
 

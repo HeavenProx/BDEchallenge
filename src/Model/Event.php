@@ -14,7 +14,6 @@ class Event extends BaseModel
     
     public function createEvent($name, $category, $eventDate, $location, $description, $DefaultUsernumber)
     {
-        // Par défaut, assigner le user number 2 ==== a changer
         $usernumber = [$DefaultUsernumber];
         if (is_array($usernumber)) {
             $usernumber = reset($usernumber);

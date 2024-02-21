@@ -46,7 +46,10 @@
 <div class="container mx-auto mt-8">
     <div class="flex justify-between mb-6">
         <h1 class="text-3xl font-semibold mb-4 text-white">Liste des Utilisateurs</h1>
-        <a href="/user/create" class="bg-yellow-500 text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4">Add User</a>    
+        <div class="flex gap-4">
+            <a href="/" class="bg-yellow-500 text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4 ml-4">Accueil</a> 
+            <a href="/user/create" class="bg-yellow-500 text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4">Add User</a>    
+        </div>
     </div>
 
     <!-- Affichage des utilisateurs -->

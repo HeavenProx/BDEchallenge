@@ -8,12 +8,15 @@ class UserController
 {
     public function create()
     {
-        // Charger le contenu de la vue register_form.php
-        $viewPath = __DIR__ . '/../View/User/register_form.php';
-        $viewContent = file_get_contents($viewPath);
-    
-        // Retourner le contenu de la vue
-        return $viewContent;
+        if(isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'Admin'){
+            ob_start();
+            require 'src/View/User/register_form.php';
+            $content = ob_get_clean();
+            return $content;
+        } else{
+            $_SESSION['error'] = "Vous ne pouvez pas accedé à cette page";
+            header('Location: /');
+        }
     }
 
 
@@ -41,24 +44,22 @@ class UserController
 
     public function edit($id)
     {
-        $userModel = new User();
-        $user = $userModel->getUserById($id);
+        if(isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'Admin'){
 
-        // Vérifiez si l'utilisateur est trouvé
-        if ($user === false) {
-            // Faites quelque chose en cas d'utilisateur non trouvé, par exemple, redirigez l'utilisateur
-            // header('Location: /not_found');
-            // exit;
+            $userModel = new User();
+            $user = $userModel->getUserById($id);
+
+            $viewPath = __DIR__ . '/../View/User/edit.php';
+            ob_start();
+            include $viewPath;
+            $viewContent = ob_get_clean();
+
+            return $viewContent;
+        } else{
+            $_SESSION['error'] = "Vous ne pouvez pas accedé à cette page";
+            header('Location: /');
         }
-
-        $viewPath = __DIR__ . '/../View/User/edit.php';
-        ob_start();
-        include $viewPath;
-        $viewContent = ob_get_clean();
-
-        return $viewContent;
     }
-
     public function update($id)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -81,6 +82,8 @@ class UserController
 
     public function delete($id)
     {
+        if(isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'Admin'){
+
         // Utilisez l'$id pour supprimer l'utilisateur de la base de données
         $userModel = new User();
         $userModel->deleteUser($id);
@@ -88,9 +91,14 @@ class UserController
         // Redirigez l'utilisateur vers la liste des utilisateurs ou effectuez toute autre action souhaitée
         header('Location: /users');
         exit;
+        } else{
+            $_SESSION['error'] = "Vous ne pouvez pas accedé à cette page";
+            header('Location: /');
+        }
     }
     public function index()
     {
+        if(isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'Admin'){
         $user = new User();
         $users = $user->getAllUsers();
 
@@ -101,5 +109,9 @@ class UserController
         $viewContent = ob_get_clean();  // Récupère le contenu de la temporisation de sortie et l'efface
 
         return $viewContent;
+        } else{
+            $_SESSION['error'] = "Vous ne pouvez pas accedé à cette page";
+            header('Location: /');
+        }
     }
 }

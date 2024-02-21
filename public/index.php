@@ -113,10 +113,11 @@ $router
     );
     
 [
-    'PATH_INFO'    => $uri,
+    'REQUEST_URI'    => $uri,
     'REQUEST_METHOD' => $httpMethod
 ] = $_SERVER;
-
+// var_dump($_SERVER);
+$uri = explode('?', $uri)[0];
 try {
     echo $router->execute($uri, $httpMethod);
 } catch (RouteNotFoundException $e) {

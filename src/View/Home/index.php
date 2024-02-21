@@ -7,9 +7,9 @@
     <style>
         <?php
         //fait avec Audrey HOSSEPIAN = patch par rapport à l'incompréhension du MVC custom du cours PHP
-         require( __DIR__. "../../../../public/css/bootstrap.css");
-         require( __DIR__. "../../../../public/css/base.css");
-         require( __DIR__. "../../../../public/css/style.css");
+         require( __DIR__. "../../../../public/asset/css/bootstrap.css");
+         require( __DIR__. "../../../../public/asset/css/base.css");
+         require( __DIR__. "../../../../public/asset/css/style.css");
          //décommenter si utilisation de fontawesome
          //require( __DIR__. "../../../../public/css/all.css");
          ?>
