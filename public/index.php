@@ -81,6 +81,16 @@ $router
         new Route('/user/delete/{id}', 'delete', 'GET', UserController::class, 'delete')
     )
 
+    // Route Wishlist
+    ->addRoute(
+        new Route('/wishlist', 'wishlist', 'GET', UserController::class, 'wishlist')
+    )
+    ->addRoute(
+        new Route('/wishlist/add/{eventNumber}', 'addToWishlist', 'GET', UserController::class, 'addToWishlist')
+    )
+    ->addRoute(
+        new Route('/wishlist/delete/{eventNumber}', 'deleteFromWishlist', 'GET', UserController::class, 'removeFromWishlist')
+    )
     // Route Img
     ->addRoute(
         new Route('/img/{file}', 'images', 'GET', AssetController::class, 'images')

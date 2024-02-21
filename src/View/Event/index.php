@@ -1,5 +1,4 @@
 <!-- View/Event/index.php -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,7 +48,7 @@
         <div>
         <a href="/" class="bg-yellow-500 text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4 ml-4">Accueil</a> 
             <a href="/event/create" class="bg-yellow-500 text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4 ml-4">Filtrer par catégorie</a>
-            <?php if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'BDE'): ?>
+            <?php if (isset($_SESSION['logged']) && $_SESSION['logged'] == true && isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'BDE'): ?>
             <a href="/event/create" class="bg-yellow-500 text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4 ml-4">Ajouter Event</a>  
             <?php endif; ?> 
         </div>
@@ -67,10 +66,19 @@
                 <a href="/event/edit/<?php echo $event['eventNumber']; ?>" class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Edit</a>
                 <a href="/event/delete/<?php echo $event['eventNumber']; ?>" onclick="return confirm('Are you sure?')" class="bg-red-900 text-white hover:bg-blue-500 hover:text-white transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Delete</a>
                 <?php endif; ?>
-                <div class="flex gap-2">
-                    <a href="event/add/wish/<?php echo $event['eventNumber']; ?>" class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-5 py-2 rounded-md cursor-pointer inline-block mt-4">Ajouter aux Favoris</a>
-                    <a href="/event/delete/<?php echo $event['eventNumber']; ?>" onclick="return confirm('Are you sure?')" class="bg-red-900 text-white hover:bg-blue-500 hover:text-white transition px-5 py-2 rounded-md cursor-pointer inline-block mt-4">Enlever des favoris</a>
-                </div>
+                <?php if(isset($_SESSION['logged']) && $_SESSION['logged'] == true): ?>
+                    <?php if (isset($wishlistButtons[$event['eventNumber']])): ?>
+                        <?php if (!$wishlistButtons[$event['eventNumber']]): ?>
+                            <!-- Affiche le bouton "Ajouter aux Favoris" si l'événement n'est pas dans la wishlist -->
+                            <a href="/wishlist/add/<?php echo $event['eventNumber']; ?>" class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-5 py-2 rounded-md cursor-pointer inline-block mt-4">Ajouter aux Favoris</a>
+                        <?php else: ?>
+                            <!-- Affiche le bouton "Enlever des Favoris" si l'événement est dans la wishlist -->
+                            <a href="/wishlist/delete/<?php echo $event['eventNumber']; ?>" class="bg-red-900 text-white hover:bg-blue-500 hover:text-white transition px-5 py-2 rounded-md cursor-pointer inline-block mt-4">Enlever des Favoris</a>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <a href="/login"><button class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Se connecter pour participer</button></a>
+                <?php endif; ?>
             </li>
         <?php endforeach; ?>
     </ul>

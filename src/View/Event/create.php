@@ -57,7 +57,7 @@
         <input type="text" id="description" name="description" required class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
 
         <label for="eventDate" class="block mb-2 text-blue-900">Date :</label>
-        <input type="text" id="eventDate" name="eventDate" required class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
+        <input type="date" id="eventDate" name="eventDate" required class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
 
         <label for="location" class="block mb-2 text-blue-900">Location :</label>
         <input type="text" id="location" name="location" required class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
