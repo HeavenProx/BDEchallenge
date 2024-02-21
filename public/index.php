@@ -5,6 +5,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use App\Controller\IndexController;
 use App\Controller\ProductController;
 use App\Controller\UserController;
+use App\Controller\EventController;
 use App\Controller\AssetController;
 use App\Controller\AuthenticationController;
 use App\Routing\Exception\RouteNotFoundException;
@@ -46,6 +47,8 @@ $router
     ->addRoute(
         new Route('/products', 'products_list', 'GET', ProductController::class, 'list')
     )
+
+    // Route User
     ->addRoute(
         new Route('/users', 'index', 'GET', UserController::class, 'index')
     )
@@ -64,11 +67,30 @@ $router
     ->addRoute(
         new Route('/user/delete/{id}', 'delete', 'GET', UserController::class, 'delete')
     )
+
+    // Route Img
     ->addRoute(
         new Route('/img/{file}', 'images', 'GET', AssetController::class, 'images')
     )
+    
+    // Route Event
     ->addRoute(
         new Route('/events', 'events', 'GET', EventController::class, 'index')
+    )
+    ->addRoute(
+        new Route('/event/create', 'create', 'GET', EventController::class, 'create')
+    )
+    ->addRoute(
+        new Route('/event/register', 'register', 'POST', EventController::class, 'register')
+    )
+    ->addRoute(
+        new Route('/event/edit/{id}', 'edit', 'GET', EventController::class, 'edit')
+    )
+    ->addRoute(
+        new Route('/event/update/{id}', 'update', 'POST', EventController::class, 'update')
+    )
+    ->addRoute(
+        new Route('/event/delete/{id}', 'delete', 'GET', EventController::class, 'delete')
     );
     
 [
