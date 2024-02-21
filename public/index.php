@@ -36,7 +36,7 @@ $router
         new Route('/registered', 'uregistered', 'POST', AuthenticationController::class, 'registered')
     )
     ->addRoute(
-        new Route('/confirmation', 'confirmation', 'GET', AuthenticationController::class, 'confirmation')
+        new Route('/confirmation/{id}', 'confirmation', 'GET', AuthenticationController::class, 'confirmation')
     )
     ->addRoute(
         new Route('/login', 'login', 'GET', IndexController::class, 'login')
