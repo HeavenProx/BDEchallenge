@@ -40,22 +40,30 @@
     </style>
 </head>
 <body>
-    <h2 class="text-2xl font-bold mb-4 text-center mt-8">Inscription</h2>
+    <h2 class="text-2xl font-bold mb-4 text-center mt-8">Connexion</h2>
 
-    <form action="/user/register" method="post" class="max-w-md mx-auto p-8 bg-white rounded-lg shadow-md">
+    <div>
+        
+    </div>
+
+    <form action="/checklogs" method="post" class="max-w-md mx-auto p-8 bg-white rounded-lg shadow-md">
         <label for="email" class="block mb-2 text-blue-900">E-mail:</label>
         <input type="email" id="email" name="email" required class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
-
-        <label for="first_name" class="block mb-2 text-blue-900">Prénom:</label>
-        <input type="text" id="first_name" name="first_name" required class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
-
-        <label for="last_name" class="block mb-2 text-blue-900">Nom:</label>
-        <input type="text" id="last_name" name="last_name" required class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
 
         <label for="password" class="block mb-2 text-blue-900">Mot de passe:</label>
         <input type="password" id="password" name="password" required class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
 
-        <button type="submit" class="bg-yellow-500 text-blue-900 px-6 py-3 rounded-md cursor-pointer hover:bg-yellow-400">S'inscrire</button>
+        <?php if (isset($_SESSION['error'])): ?>
+            <?php 
+                if (isset($_SESSION['error'])): 
+                    echo '<h3 class="text-red-600">' . $_SESSION['error'] . '</h3>';
+                    unset($_SESSION['error']); // Supprime la variable $_SESSION['error']
+                endif; 
+            ?>
+        <?php endif; ?>
+
+        <button type="submit" class="bg-yellow-500 text-blue-900 px-6 py-3 rounded-md cursor-pointer hover:bg-yellow-400">Se connecter</button>
+        <a href="/register" class="text-black ml-5 border-b border-black">S'inscrire</a>
     </form>
 </body>
 </html>
