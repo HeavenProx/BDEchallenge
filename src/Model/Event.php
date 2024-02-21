@@ -12,7 +12,7 @@ class Event extends BaseModel
     }
     
     
-    public function createEvent($name, $category, $eventDate, $location, $description, $DefaultUsernumber = 2)
+    public function createEvent($name, $category, $eventDate, $location, $description, $DefaultUsernumber)
     {
         // Par défaut, assigner le user number 2 ==== a changer
         $usernumber = [$DefaultUsernumber];
@@ -50,15 +50,6 @@ class Event extends BaseModel
         $stmt->execute([$eventId]);
     }
 
-
-    /*
-    public function getUserByEmail($email)
-    {
-        $stmt = $this->db->prepare("SELECT * FROM User WHERE email = ?");
-        $stmt->execute([$email]);
-        return $stmt->fetch(\PDO::FETCH_ASSOC);
-    }
-    */
     public function getEventById($eventId)
     {
         // Assurez-vous que $eventId est une valeur, pas un tableau

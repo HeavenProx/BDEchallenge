@@ -30,7 +30,7 @@
                 <ul>
                     
                     <?php if(isset($_SESSION['logged']) && $_SESSION['logged'] == true): ?>
-                        <li><a href="/logout"><button class="btn border"><?php echo $_SESSION['user']['firstName'] . " " . $_SESSION['user']['lastName'] ?></button></a></li>
+                        <li><a href="/profile"><button class="btn border"><?php echo $_SESSION['user']['firstName'] . " " . $_SESSION['user']['lastName'] ?></button></a></li>
                         <li><a href="/logout"><button class="btn border">Se déconnecter</button></a></li>
                     <?php else: ?>
                         <li><a href="/login"><button class="btn border">Se connecter</button></a></li>
@@ -130,7 +130,7 @@
         <div class="col-lg-6 col-md-12 px-5">Sciences-U Lyon</div>
         <div class="col-lg-6 col-md-12 px-5">53 Cr Albert Thomas, 69003 Lyon</div>
         <div class="col-lg-6 col-md-12 px-5">Sciences-u-lyon.fr</div>
-        <div class="col-lg-6 col-md-12 px-5">04 26 29 01 01</div>
+        <div class="col-lg-6 col-md-12 px-5"><a href="/contact">Nous Contacter</a></div>
         </div>
     </footer>
 

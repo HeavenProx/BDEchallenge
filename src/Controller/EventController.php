@@ -21,12 +21,10 @@ class EventController
     }
 
     public function create(){
-        // Charger le contenu de la vue create.php
-        $viewPath = __DIR__ . '/../View/Event/create.php';
-        $viewContent = file_get_contents($viewPath);
-    
-        // Retourner le contenu de la vue
-        return $viewContent;
+        ob_start();
+        require 'src/View/Event/create.php';
+        $content = ob_get_clean();
+        return $content;
     }
 
     public function register()
@@ -38,18 +36,20 @@ class EventController
             $eventDate = $_POST['eventDate'] ?? '';
             $location = $_POST['location'] ?? '';
             $description = $_POST['description'] ?? '';
-            
-            // Validez les données d'inscription (ajoutez des validations supplémentaires selon vos besoins)
-            // Enregistrez l'utilisateur dans la base de données
-            $eventModel = new Event();
-            $eventModel->createEvent($name, $category, $eventDate, $location, $description);
 
-            header('Location: /events');
-            exit;
+            if(isset($_SESSION['logged']) && $_SESSION['logged'] == true){
+                // Validez les données d'inscription (ajoutez des validations supplémentaires selon vos besoins)
+                // Enregistrez l'utilisateur dans la base de données
+                $eventModel = new Event();
+                $eventModel->createEvent($name, $category, $eventDate, $location, $description, $_SESSION['user']['userNumber']);
+
+                header('Location: /events');
+                exit;
+            } else{
+                $_SESSION['error'] = "Vous n'êtes pas connecté";
+                header('Location: /event/create');
+            }
         }
-     
-        // Affichez le formulaire d'inscription
-        echo 'Vous avez bien ajouté un évènement !';
     }
 
     public function edit($id)
@@ -82,14 +82,6 @@ class EventController
             $location = $_POST['location'] ?? '';
             $description = $_POST['description'] ?? '';
 
-            //var_dump($name, $category, $eventDate, $location, $description);
-            // Assurez-vous que les champs requis ne sont pas vides
-            if (empty($name) || empty($category) || empty($eventDate) || empty($location) || empty($description)) {
-                // Faites quelque chose en cas de champ vide, par exemple, redirigez l'utilisateur avec un message d'erreur
-                //header('Location: /events?error=Champs vides');
-                //exit;
-            }
-
             // Appel de la méthode updateEvent du modèle
             $eventModel = new Event();
             $eventModel->updateEvent($id, $name, $category, $eventDate, $location, $description);
@@ -105,7 +97,6 @@ class EventController
         // Utilisez l'$id pour supprimer l'utilisateur de la base de données
         $eventModel = new Event();
         $eventModel->deleteEvent($id);
-        // var_dump($userModel);
         // Redirigez l'utilisateur vers la liste des utilisateurs ou effectuez toute autre action souhaitée
         header('Location: /events');
         exit;
