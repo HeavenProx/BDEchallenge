@@ -47,7 +47,11 @@
         <input type="text" id="name" name="name" required class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
 
         <label for="category" class="block mb-2 text-blue-900">Catégorie :</label>
-        <input type="text" id="category" name="category" required class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
+        <select id="category" name="category" class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
+            <option value="Soiree">Soirée</option>
+            <option value="Concert">Concert</option>
+            <option value="Cinema">Cinéma</option>
+        </select>
 
         <label for="description" class="block mb-2 text-blue-900">Description :</label>
         <input type="text" id="description" name="description" required class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
