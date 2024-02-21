@@ -12,7 +12,7 @@ class Event extends BaseModel
     }
     
     
-    public function createEvent($name, $category, $eventDate, $location, $description, $DefaultUsernumber = 2)
+    public function createEvent($name, $category, $eventDate, $location, $description, $DefaultUsernumber)
     {
         // Par défaut, assigner le user number 2 ==== a changer
         $usernumber = [$DefaultUsernumber];

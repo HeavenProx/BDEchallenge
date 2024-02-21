@@ -51,16 +51,12 @@ $router
         new Route('/checklogs', 'checklogs', 'POST', AuthenticationController::class, 'checklogs')
     )
     ->addRoute(
+        new Route('/contact', 'contact', 'GET', IndexController::class, 'contact')
+    )
+    ->addRoute(
         new Route('/contact/send', 'send', 'POST', IndexController::class, 'send')
     )
     
-    ->addRoute(
-        new Route('/logout', 'logout', 'GET', AuthenticationController::class, 'logout')
-    )
-
-    ->addRoute(
-        new Route('/checklogs', 'checklogs', 'POST', AuthenticationController::class, 'checklogs')
-    )
     ->addRoute(
         new Route('/logout', 'logout', 'GET', AuthenticationController::class, 'logout')
     )
