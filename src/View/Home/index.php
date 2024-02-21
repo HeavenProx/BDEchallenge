@@ -43,7 +43,7 @@
 
         <div>
             <h1 class="cherry">Bienvenue dans <br> la ruche</h1>
-            <h2><a href="#">Voir les évévenements</a></h2>
+            <h2><a href="/events">Voir les évévenements</a></h2>
         </div>
     </header>
 

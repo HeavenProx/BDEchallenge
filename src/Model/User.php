@@ -35,7 +35,6 @@ class User extends BaseModel
         var_dump($stmt);
         $stmt->execute([$email, $firstName, $lastName, $hashedPassword, $roles, $userId]);
         var_dump($userId);
-
     }
 
     public function deleteUser($userId)

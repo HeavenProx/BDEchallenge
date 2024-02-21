@@ -1,11 +1,11 @@
-<!-- View/User/index.php -->
+<!-- View/Event/index.php -->
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des Utilisateurs</title>
+    <title>Liste des évévenements</title>
     <!-- Ajoutez ici le lien vers le CDN de Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!-- Ajoutez ici votre propre fichier de style si nécessaire -->
@@ -45,23 +45,26 @@
 
 <div class="container mx-auto mt-8">
     <div class="flex justify-between mb-6">
-        <h1 class="text-3xl font-semibold mb-4 text-white">Liste des Utilisateurs</h1>
-        <a href="/user/create" class="bg-yellow-500 text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4">Add User</a>    
+        <h1 class="text-3xl font-semibold mb-4 text-white">Liste des évévenements</h1>
+        <div>
+        <a href="/" class="bg-yellow-500 text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4 ml-4">Accueil</a> 
+        <a href="/event/create" class="bg-yellow-500 text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4 ml-4">Ajouter Event</a>    
+    </div>
     </div>
 
     <!-- Affichage des utilisateurs -->
     <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <?php foreach ($users as $user): ?>
+        <?php foreach ($events as $event): ?>
             <li class="bg-white p-4 rounded shadow">
-                <p class="text-xl font-semibold mb-2 text-gray-600"><?php echo $user['firstName'] . ' ' . $user['lastName']; ?></p>
-                <p class="text-gray-600"><?php echo $user['email']; ?></p>
-                <?php echo $user['userNumber']; ?>
+                <p class="text-xl font-bold mb-2 text-gray-800"><?php echo $event['name'] . ' - ' . $event['eventDate']; ?></p>
+                <p class="text-lg text-gray-500 mb-2"><?php echo $event['category'] . ' à ' . $event['location']; ?></p>
+                <p class="text-gray-700"><?php echo $event['description']; ?></p>
 
-                <!-- Ajoutez d'autres informations d'utilisateur si nécessaire -->
-                <a href="/user/edit/<?php echo $user['userNumber']; ?>" class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Edit</a>
-
+                <!-- Bouton edit -->
+                <a href="/event/edit/<?php echo $event['eventNumber']; ?>" class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Edit</a>
+                
                 <!-- Bouton de suppression -->
-                <a href="/user/delete/<?php echo $user['userNumber']; ?>" onclick="return confirm('Are you sure?')" class="bg-red-900 text-white hover:bg-blue-500 hover:text-white transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Delete</a>
+                <a href="/event/delete/<?php echo $event['eventNumber']; ?>" class="bg-red-900 text-white hover:bg-blue-500 hover:text-white transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Delete</a>
             </li>
         <?php endforeach; ?>
     </ul>

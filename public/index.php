@@ -49,6 +49,8 @@ $router
     ->addRoute(
         new Route('/logout', 'logout', 'GET', AuthenticationController::class, 'logout')
     )
+
+    // Route User
     ->addRoute(
         new Route('/users', 'index', 'GET', UserController::class, 'index')
     )
@@ -67,13 +69,31 @@ $router
     ->addRoute(
         new Route('/user/delete/{id}', 'delete', 'GET', UserController::class, 'delete')
     )
+
+    // Route Img
     ->addRoute(
         new Route('/img/{file}', 'images', 'GET', AssetController::class, 'images')
     )
-    // ->addRoute(
-    //     new Route('/events', 'events', 'GET', EventController::class, 'index')
-    // )
-    ;
+    
+    // Route Event
+    ->addRoute(
+        new Route('/events', 'events', 'GET', EventController::class, 'index')
+    )
+    ->addRoute(
+        new Route('/event/create', 'create', 'GET', EventController::class, 'create')
+    )
+    ->addRoute(
+        new Route('/event/register', 'register', 'POST', EventController::class, 'register')
+    )
+    ->addRoute(
+        new Route('/event/edit/{id}', 'edit', 'GET', EventController::class, 'edit')
+    )
+    ->addRoute(
+        new Route('/event/update/{id}', 'update', 'POST', EventController::class, 'update')
+    )
+    ->addRoute(
+        new Route('/event/delete/{id}', 'delete', 'GET', EventController::class, 'delete')
+    );
     
 [
     'REQUEST_URI'    => $uri,
