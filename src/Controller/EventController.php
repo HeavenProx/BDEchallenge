@@ -67,12 +67,14 @@ class EventController
         // Parcourez les événements pour déterminer quels boutons afficher
         foreach ($events as $ev) {
             $participants = $event->getParticipants($ev['eventNumber']);
-
-            $isParticipant = in_array($_SESSION['user']['userNumber'], $participants);
-            $isInWishlist = $userModel->isInWishlist($ev['eventNumber']);
-            // Stockez l'information pour chaque événement
-            $wishlistButtons[$ev['eventNumber']] = $isInWishlist;
-            $eventParticipants[$ev['eventNumber']] = $isParticipant;
+            if(isset($_SESSION['logged']) && $_SESSION['logged'] == true){
+                $isParticipant = in_array($_SESSION['user']['userNumber'], $participants);
+                $isInWishlist = $userModel->isInWishlist($ev['eventNumber']);
+                // Stockez l'information pour chaque événement
+                $wishlistButtons[$ev['eventNumber']] = $isInWishlist;
+                $eventParticipants[$ev['eventNumber']] = $isParticipant;
+            }
+            
 
         }
 
