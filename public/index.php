@@ -91,6 +91,15 @@ $router
     ->addRoute(
         new Route('/wishlist/delete/{eventNumber}', 'deleteFromWishlist', 'GET', UserController::class, 'removeFromWishlist')
     )
+
+    // Route Participate
+    ->addRoute(
+        new Route('/event/add-participant/{id}', 'addParticipant', 'GET', EventController::class, 'addParticipant')
+    )
+    ->addRoute(
+        new Route('/event/remove-participant/{id}', 'removeParticipant', 'GET', EventController::class, 'removeParticipant')
+    )
+
     // Route Img
     ->addRoute(
         new Route('/img/{file}', 'images', 'GET', AssetController::class, 'images')
@@ -121,8 +130,6 @@ $router
     ->addRoute(
         new Route('/event/delete/{id}', 'delete', 'GET', EventController::class, 'delete')
     )
-
-    // profil --> pb de controller
     ->addRoute(
         new Route('/profil', 'profil', 'GET', UserController::class, 'profil')
     )

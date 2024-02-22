@@ -5,6 +5,7 @@ namespace App\Model;
 class Event extends BaseModel
 {
 
+    public $userNumber;
     public function getAllEvents()
     {
         $stmt = $this->db->query("SELECT * FROM Event");
@@ -71,17 +72,31 @@ class Event extends BaseModel
         return ($event !== false) ? $event : null;
     }
 
-    /*
-    public function getUserId($userEmail)
+    public function addParticipant($eventNumber)
     {
-        $stmt = $this->db->prepare("SELECT userNumber FROM User WHERE email = ?");
-        $stmt->execute([$userEmail]);
-        return $stmt->fetch(\PDO::FETCH_ASSOC);
+        $eventNumber = is_array($eventNumber) ? reset($eventNumber) : $eventNumber;        
+
+        $stmt = $this->db->prepare("INSERT INTO event_participants (userNumber, eventNumber) VALUES (?, ?)");
+        $stmt->execute([$this->userNumber, $eventNumber]);
     }
 
-    public function updateVerification($userId)
+    public function deleteParticipant($eventNumber)
     {
-        $stmt = $this->db->prepare("UPDATE User SET verified = 1 WHERE userNumber = ?");
-        $stmt->execute([$userId]);
-    }*/
+        $eventNumber = is_array($eventNumber) ? reset($eventNumber) : $eventNumber;        
+
+        $stmt = $this->db->prepare("DELETE FROM event_participants WHERE userNumber = ? AND eventNumber = ?");
+        $stmt->execute([$this->userNumber, $eventNumber]);
+    }
+
+    public function isParticipant($eventNumber) {
+        $stmt = $this->db->prepare("SELECT COUNT(*) FROM event_participants WHERE eventNumber = ? AND userNumber = ?");
+        $stmt->execute([$eventNumber, $this->userNumber]);
+        return $stmt->fetchColumn() > 0;
+    }
+    public function getParticipants($eventNumber)
+    {
+        $stmt = $this->db->prepare("SELECT userNumber FROM event_participants WHERE eventNumber = ?");
+        $stmt->execute([$eventNumber]);
+        return $stmt->fetchAll(\PDO::FETCH_COLUMN);
+    }
 }

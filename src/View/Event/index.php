@@ -79,7 +79,7 @@
 
 
     <!-- Affichage des utilisateurs -->
-    <ul id="events-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <ul id="events-list" class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <?php foreach ($events as $event): ?>
             <li class="bg-white p-4 rounded shadow">
                 <p class="text-xl font-bold mb-2 text-gray-800"><?php echo $event['name'] . ' - ' . $event['eventDate']; ?></p>
@@ -98,15 +98,24 @@
                         <!-- Affiche le bouton "Enlever des Favoris" si l'événement est dans la wishlist -->
                         <a href="/wishlist/delete/<?php echo $event['eventNumber']; ?>" class="bg-red-900 text-white hover:bg-blue-500 hover:text-white transition px-5 py-2 rounded-md cursor-pointer inline-block mt-4">Enlever des Favoris</a>
                     <?php endif; ?>
+                    Boutons pour ajouter ou supprimer des participants
+                    <?php if (!$eventParticipants[$event['eventNumber']]): ?>
+                        <!-- Affiche le bouton "Ajouter participant" si l'utilisateur n'est pas dans la liste des participants -->
+                        <a href="/event/add-participant/<?php echo $event['eventNumber']; ?>" class="bg-green-500 text-white hover:bg-green-700 px-5 py-2 rounded-md cursor-pointer inline-block mt-4">Participer</a>
+                    <?php else: ?>
+                        <!-- Affiche le bouton "Retirer participant" si l'utilisateur est dans la liste des participants -->
+                        <a href="/event/remove-participant/<?php echo $event['eventNumber']; ?>" class="bg-red-500 text-white hover:bg-red-700 px-5 py-2 rounded-md cursor-pointer inline-block mt-4">Ne plus participer</a>
+                    <?php endif; ?>
                 <?php else: ?>
                     <a href="/login"><button class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Se connecter pour participer</button></a>
                 <?php endif; ?>
             </li>
         <?php endforeach; ?>
     </ul>
-
+<div class="container mx-auto">
     <a href="/events/prevp" class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Page précédente</a>
     <a href="/events/nextp" class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Page suivante</a>
+</div>
 </div>
 
 
