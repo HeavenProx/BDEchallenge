@@ -96,28 +96,20 @@
         <section class="containerEvents">
             <div class="container text-center">
                 <h2 class="cherry">Nos Evènements</h2>
-                <ul class="row list-unstyled">
-                    <li class="col-lg-4 col-md-12 py-4">
-                        <div>
-                            <!--<img src="img/" class="mb-4" alt="faits maison"> -->
-                            <h3 class="fw-bold">Soirée d'intégration</h3>
-                            <p>Ipsum qui adipisicing quis mollit nostrud laboris dolore.</p>
-                        </div>
-                    </li>
-                    <li class="col-lg-4 col-md-12 py-4">
-                        <div>
-                            <!--<img src="img/" class="mb-4" alt="produits frais"> -->
-                            <h3 class="fw-bold">Soirée Halloween</h3>
-                            <p>Ipsum qui adipisicing quis mollit nostrud laboris dolore.</p>
-                        </div>
-                    </li>
-                    <li class="col-lg-4 col-md-12 py-4">
-                        <div>
-                            <!--<img src="img/" class="mb-4" alt="bios et locaux"> -->
-                            <h3 class="fw-bold">Soirée Déguisé</h3>
-                            <p>Ipsum qui adipisicing quis mollit nostrud laboris dolore.</p>
-                        </div>
-                    </li>
+                <ul class="row justify-content-center list-unstyled">
+                    <?php if (empty($events)): ?>
+                        <p class="mt-4">Pas encore d'évènement mais reste à l'affût !</p>
+                    <?php else: ?>
+                        <?php foreach ($events as $event): ?>
+                            <li class="col-lg-4 col-md-12  flex-wrap py-4">
+                                <div>
+                                    <h3 class="fw-bold mb-5 fs-2"><?php echo $event['name'] ?></h3>
+                                    <p><?php echo $event['category'] . ' à ' . $event['eventDate']?></p>
+                                    <p><?php echo $event['description'] ?></p>
+                                </div>
+                            </li>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </ul>
                 <a href="/events"><button class="btn border btnEvent">Tout nos évènements</button></a>
             </div>
