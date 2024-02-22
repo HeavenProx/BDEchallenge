@@ -7,6 +7,7 @@ use App\Controller\UserController;
 use App\Controller\AssetController;
 use App\Controller\AuthenticationController;
 use App\Controller\EventController;
+use App\Controller\ProfilController;
 use App\Routing\Exception\RouteNotFoundException;
 use App\Routing\Route;
 use App\Routing\Router;
@@ -131,13 +132,13 @@ $router
         new Route('/event/delete/{id}', 'delete', 'GET', EventController::class, 'delete')
     )
     ->addRoute(
-        new Route('/profil', 'profil', 'GET', UserController::class, 'profil')
+        new Route('/profil', 'profil', 'GET', ProfilController::class, 'profil')
     )
     ->addRoute(
-        new Route('/profil/update/{id}', 'update', 'POST', UserController::class, 'profilUpdate')
+        new Route('/profil/update/{id}', 'update', 'POST', ProfilController::class, 'update')
     )
     ->addRoute(
-        new Route('/profil/delete/{id}', 'delete', 'GET', UserController::class, 'profilDelete')
+        new Route('/profil/delete/{id}', 'delete', 'GET', ProfilController::class, 'delete')
     );
 
     

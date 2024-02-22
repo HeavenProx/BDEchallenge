@@ -3,12 +3,36 @@
 namespace App\Controller;
 
 use App\Model\User;
+use App\Model\Event;
 
 class IndexController
 {
     public function home(): string
     {   
-        // var_dump($_SESSION);
+        $event = new Event();
+        $allEvents = $event->getAllEvents();
+
+        $eventsToCome = [];
+        $eventCount = 0;
+        $i = 0;
+
+        // Trier le tableau par la date
+        usort($allEvents, function($a, $b) {
+            return strtotime($a['eventDate']) - strtotime($b['eventDate']);
+        });
+
+        // Garder seulement les 3 premiers
+        foreach ($allEvents as $e) {
+            if (strtotime($e['eventDate']) >= strtotime(date('Y-m-d'))) {
+                $eventsToCome[] = $e;
+                if (count($eventsToCome) == 3) {
+                    break;  // Arrêter la boucle après avoir ajouté les trois premiers événements.
+                }
+            }
+        }
+
+        $events = $eventsToCome;
+
         ob_start();
         require 'src/View/Home/index.php';
         $content = ob_get_clean();

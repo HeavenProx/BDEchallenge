@@ -53,7 +53,9 @@ class EventController
         $eventParticipants = [];
 
         $userModel = new User();
-        $userModel->userNumber = $_SESSION['user']['userNumber'];
+        if($_SESSION['logged'] == true){
+            $userModel->userNumber = $_SESSION['user']['userNumber'];
+        }
         // Parcourez les événements pour déterminer quels boutons afficher
         foreach ($events as $ev) {
             $participants = $event->getParticipants($ev['eventNumber']);
