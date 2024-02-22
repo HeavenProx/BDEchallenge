@@ -102,7 +102,6 @@
                         <!-- Affiche le bouton "Enlever des Favoris" si l'événement est dans la wishlist -->
                         <a href="/wishlist/delete/<?php echo $event['eventNumber']; ?>" class="bg-red-900 text-white hover:bg-blue-500 hover:text-white transition px-5 py-2 rounded-md cursor-pointer inline-block mt-4">Enlever des Favoris</a>
                     <?php endif; ?>
-                    Boutons pour ajouter ou supprimer des participants
                     <?php if (!$eventParticipants[$event['eventNumber']]): ?>
                         <!-- Affiche le bouton "Ajouter participant" si l'utilisateur n'est pas dans la liste des participants -->
                         <a href="/event/add-participant/<?php echo $event['eventNumber']; ?>" class="bg-green-500 text-white hover:bg-green-700 px-5 py-2 rounded-md cursor-pointer inline-block mt-4">Participer</a>
