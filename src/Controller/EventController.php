@@ -58,16 +58,22 @@ class EventController
         $events = array_slice($eventsToCome, $startIndex, $endIndex - $startIndex + 1);
 
         $wishlistButtons = [];
-        
+        $eventParticipants = [];
+
         $userModel = new User();
         if($_SESSION['logged'] == true){
             $userModel->userNumber = $_SESSION['user']['userNumber'];
         }
         // Parcourez les événements pour déterminer quels boutons afficher
         foreach ($events as $ev) {
+            $participants = $event->getParticipants($ev['eventNumber']);
+
+            $isParticipant = in_array($_SESSION['user']['userNumber'], $participants);
             $isInWishlist = $userModel->isInWishlist($ev['eventNumber']);
             // Stockez l'information pour chaque événement
             $wishlistButtons[$ev['eventNumber']] = $isInWishlist;
+            $eventParticipants[$ev['eventNumber']] = $isParticipant;
+
         }
 
         // Incluez les utilisateurs dans la vue
@@ -184,5 +190,51 @@ class EventController
         }
     }
 
+    private function handleParticipantAction($id, $action)
+{
+    if (isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
+        $eventModel = new Event();
+
+        // Assurez-vous que l'utilisateur est connecté et que userNumber est disponible
+        if (isset($_SESSION['user']['userNumber'])) {
+            $eventModel->userNumber = $_SESSION['user']['userNumber']; // Assurez-vous d'ajuster la clé en fonction de votre structure de session
+        } else {
+            // Gérez le cas où userNumber n'est pas disponible
+            // Vous pouvez rediriger l'utilisateur vers une page d'erreur par exemple
+            header('Location: /error');
+            exit;
+        }
+
+        switch ($action) {
+            case 'add':
+                $eventModel->addParticipant($id);
+                break;
+            case 'remove':
+                $eventModel->deleteParticipant($id);
+                break;
+            default:
+                // Gérer une action non valide
+                break;
+        }
+
+        // Redirigez l'utilisateur ou effectuez toute autre action souhaitée
+        header('Location: /events');
+        exit;
+    } else {
+        // Redirigez l'utilisateur vers la page de connexion s'il n'est pas connecté
+        header('Location: /login');
+        exit;
+    }
+}
+
+    public function addParticipant($id)
+    {
+        $this->handleParticipantAction($id, 'add');
+    }
+
+    public function removeParticipant($id)
+    {
+        $this->handleParticipantAction($id, 'remove');
+    }
 
 }
