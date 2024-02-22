@@ -53,6 +53,7 @@ class Router
         // Extraire les paramètres de l'URL
         $parameters = $route->extractParameters($uri);
 
+        //var_dump($controllerClass);
         $controllerInstance = new $controllerClass();
         return $controllerInstance->$method($parameters);
     }

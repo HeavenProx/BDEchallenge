@@ -30,7 +30,7 @@
                 <ul>
                     
                     <?php if(isset($_SESSION['logged']) && $_SESSION['logged'] == true): ?>
-                        <li><a href="/profile"><button class="btn border"><?php echo $_SESSION['user']['firstName'] . " " . $_SESSION['user']['lastName'] ?></button></a></li>
+                        <li><a href="/profil"><button class="btn border"><?php echo $_SESSION['user']['firstName'] . " " . $_SESSION['user']['lastName'] ?></button></a></li>
                         <li><a href="/logout"><button class="btn border">Se déconnecter</button></a></li>
                     <?php else: ?>
                         <li><a href="/login"><button class="btn border">Se connecter</button></a></li>
@@ -94,9 +94,9 @@
         </section>
 
         <section class="containerEvents">
-            <div class="container">
-                <h2 class="text-center cherry">Nos Evènements</h2>
-                <ul class="row list-unstyled text-center ">
+            <div class="container text-center">
+                <h2 class="cherry">Nos Evènements</h2>
+                <ul class="row list-unstyled">
                     <li class="col-lg-4 col-md-12 py-4">
                         <div>
                             <!--<img src="img/" class="mb-4" alt="faits maison"> -->
@@ -119,6 +119,7 @@
                         </div>
                     </li>
                 </ul>
+                <a href="/events"><button class="btn border btnEvent">Tout nos évènements</button></a>
             </div>
                
         </section>

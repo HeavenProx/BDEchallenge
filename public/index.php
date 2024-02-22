@@ -110,7 +110,19 @@ $router
     )
     ->addRoute(
         new Route('/event/delete/{id}', 'delete', 'GET', EventController::class, 'delete')
+    )
+
+    // profil --> pb de controller
+    ->addRoute(
+        new Route('/profil', 'profil', 'GET', UserController::class, 'profil')
+    )
+    ->addRoute(
+        new Route('/profil/update/{id}', 'update', 'POST', UserController::class, 'profilUpdate')
+    )
+    ->addRoute(
+        new Route('/profil/delete/{id}', 'delete', 'GET', UserController::class, 'profilDelete')
     );
+
     
 [
     'REQUEST_URI'    => $uri,
