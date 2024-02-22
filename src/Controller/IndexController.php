@@ -25,9 +25,9 @@ class IndexController
         foreach ($allEvents as $e) {
             if (strtotime($e['eventDate']) >= strtotime(date('Y-m-d'))) {
                 $eventsToCome[] = $e;
-                if (count($eventsToCome) == 3) {
-                    break;  // Arrêter la boucle après avoir ajouté les trois premiers événements.
-                }
+                // if (count($eventsToCome) == 3) {
+                //     break;  // Arrêter la boucle après avoir ajouté les trois premiers événements.
+                // }
             }
         }
 

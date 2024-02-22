@@ -15,12 +15,14 @@ body {
   padding: 10px 15px;
   color: white;
   border-radius: 15px;
+  transition: all 0.3s;
 }
 .btnEvent {
   font-size: 16px;
 }
 .btn:hover {
-  background-color: #0c3754;
+  color: #082b43;
+  background-color: #fdc040;
 }
 
 .cherry {
@@ -98,6 +100,24 @@ header h2 {
   border-right: 2px white solid;
 }
 
+header h2 a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s, border-color 0.3s; /* Ajoutez une transition de couleur et de bordure */
+}
+
+header h2 a:hover {
+  color: #fdc040; /* Couleur du texte au survol */
+  border-color: #fdc040; /* Couleur de la bordure au survol */
+}
+
+header h2 {
+  font-size: 20px;
+  text-align: right;
+  margin: 170px 170px 0 0;
+  padding: 4px 10px;
+  border-right: 2px white solid;
+}
 /* A propos */
 main .apropos {
   height: 100vh;
@@ -139,7 +159,7 @@ main .apropos h3 {
 .containerEvents {
   background: #082b43;
   color: white;
-  padding: 40px 0;
+  padding: 160px 0;
   width: 100%;
 }
 .containerEvents h2 {
@@ -151,7 +171,47 @@ main .apropos h3 {
   padding: 25px;
   border: 1px solid white;
 }
+:root {
+  --primary-color: #082b43;
+  --secondary-color: #fdc040;
+}
 
+/* Appliquez le style innovant à vos événements */
+.event-item {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.event-item:hover {
+  transform: scale(1.05);
+}
+
+.event-item h3 {
+  font-weight: bold;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--secondary-color);
+  padding-bottom: 0.5rem;
+}
+
+.event-item p {
+  margin-bottom: 1rem;
+}
+
+.event-category {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.event-date {
+  color: var(--primary-color);
+  font-style: italic;
+}
 /* footer */
 footer {
   padding: 40px 0;
