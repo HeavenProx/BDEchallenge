@@ -40,7 +40,7 @@
     </style>
 </head>
 <body>
-    <h2 class="text-2xl font-bold mb-4">Nous envoyer un message</h2>
+    <h2 class="text-2xl text-center font-bold my-5">Nous envoyer un message</h2>
 
     <form action="/contact/send" method="post" class="max-w-md mx-auto p-8 bg-white rounded-lg shadow-md">
 
@@ -50,7 +50,6 @@
         <label for="message" class="block mb-2 text-blue-900">Message :</label>
         <input type="textarea" id="message" name="message" required class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
 
-        
         <?php 
             if (isset($_SESSION['error'])): 
                 echo '<h3 class="text-red-600">' . $_SESSION['error'] . '</h3>';

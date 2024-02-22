@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Model\Event;
+use App\Model\User;
 
 class EventController
 {
@@ -11,6 +12,7 @@ class EventController
         
         $event = new Event();
         $allEvents = $event->getAllEvents();
+        // var_dump($allEvents);
         $eventsToCome = [];
         foreach ($allEvents as $e) {
             if(isset($_GET['category']) && isset($_GET['date'])){
@@ -46,6 +48,17 @@ class EventController
 
         // Extraire les événements à afficher pour la page actuelle
         $events = array_slice($eventsToCome, $startIndex, $endIndex - $startIndex + 1);
+
+        $wishlistButtons = [];
+        
+        $userModel = new User();
+        $userModel->userNumber = $_SESSION['user']['userNumber'];
+        // Parcourez les événements pour déterminer quels boutons afficher
+        foreach ($events as $ev) {
+            $isInWishlist = $userModel->isInWishlist($ev['eventNumber']);
+            // Stockez l'information pour chaque événement
+            $wishlistButtons[$ev['eventNumber']] = $isInWishlist;
+        }
 
         // Incluez les utilisateurs dans la vue
         $viewPath = __DIR__ . '/../View/Event/index.php';
