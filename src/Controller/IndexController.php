@@ -9,6 +9,8 @@ class IndexController
 {
     public function home(): string
     {   
+        // Permet de charger les 3 évènements les plus récents pour la partie "Nos évènements"
+
         $event = new Event();
         $allEvents = $event->getAllEvents();
 
@@ -30,9 +32,9 @@ class IndexController
                 }
             }
         }
-
         $events = $eventsToCome;
 
+        // Affiche la page Home
         ob_start();
         require 'src/View/Home/index.php';
         $content = ob_get_clean();
@@ -41,6 +43,8 @@ class IndexController
 
     public function contact(): string
     {
+        // Afficher la page et le formulaire de contact
+
         ob_start();
         require 'src/View/Contact/index.php';
         $content = ob_get_clean();
@@ -49,6 +53,8 @@ class IndexController
 
     public function send() 
     {
+        // Permet d'envoyer un mail avec le mail utilisateur au mail de Mathis 
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Récupérez les données du formulaire d'inscription
             $objet = $_POST['objet'] ?? '';
@@ -70,9 +76,8 @@ class IndexController
                     </body>
                     </html>
                 ';
-                //$id = $userModel->getUserId($_POST['email']);
                 
-                //Send a mail
+                // Envoyer le mail à Mathis grâce aux bonnes informations de l'utilisateur
                 $mailController = new MailController();
                 $mailController->sendMail($_SESSION['user']['email'], $_SESSION['user']['lastName'] . $_SESSION['user']['firstName'], 'mathis.enrici@gmail.com', 'BEEDE', $objet, $content);
 

@@ -9,7 +9,7 @@
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
         <!-- Ajoutez ici votre propre fichier de style si nécessaire -->
     </head>
-    <body class="bg-gray-100">
+    <body class="bg-gray-800">
         <div class="container mx-auto mt-8">
             
             <a href="/" class="bg-yellow-500 text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4 ml-4">Accueil</a>

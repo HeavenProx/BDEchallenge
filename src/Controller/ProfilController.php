@@ -16,20 +16,18 @@ class ProfilController
 
     public function update($id)
     {
-        // Récupérez les données du formulaire de mise à jour
+        // Récupére les données 
         $email = $_POST['email'] ?? '';
         $firstName = $_POST['first_name'] ?? '';
         $lastName = $_POST['last_name'] ?? '';
         $password = $_SESSION['user']['password'];
         $role = $_SESSION['user']['role'];
 
-        // var_dump($email, $firstName, $lastName, $password);
+        // Envoie au model pour faire la requete de maj
         $userModel = new Profil();
-        // var_dump($userModel);
         $userModel->updateProfil($id, $email, $firstName, $lastName, $password, $role);
-        // var_dump($userModel);
 
-        // Re initialiser les nouvelles données dans les $_SESSION
+        // Ecrase les données $_SESSION['user'] pour que le changement apparaisse en front
         $_SESSION['user']['email'] = $email;
         $_SESSION['user']['firstName'] = $firstName;
         $_SESSION['user']['lastName'] = $lastName;
@@ -41,14 +39,14 @@ class ProfilController
 
     public function delete($id)
     {
-        // Utilisez l'$id pour supprimer l'utilisateur de la base de données
+        // Envoie au model pour faire la requete de suppression de l'utilisateur en la base de données
         $userModel = new Profil();
         $userModel->deleteProfil($id);
 
+        // Deconnecte l'utilisateur et écrase des donnees de session
         $_SESSION['logged'] = false;
         $_SESSION['user'] = [];
-        // var_dump($userModel);
-        // Redirigez l'utilisateur vers la liste des utilisateurs ou effectuez toute autre action souhaitée
+
         header('Location: /');
         exit;
     }

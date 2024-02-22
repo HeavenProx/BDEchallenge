@@ -48,9 +48,8 @@ class EventController
         // Calculer le nombre total de pages
         $_SESSION['totalPages'] = ceil(count($eventsToCome) / $eventsPerPage);
 
-        // Déterminer la page actuelle
         $currentpage = isset($_SESSION['currentPage']) ? $_SESSION['currentPage'] : 1;
-
+        
         // Calculer l'indice de début et de fin des événements à afficher pour la page actuelle
         $startIndex = ($currentpage - 1) * $eventsPerPage;
         $endIndex = min($startIndex + $eventsPerPage - 1, count($eventsToCome) - 1);
@@ -121,7 +120,7 @@ class EventController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Récupérez les données du formulaire d'inscription
-            $name = $_POST['name'] ?? '';
+            $name = $_POST['name'] ?? '';           
             $category = $_POST['category'] ?? '';
             $eventDate = $_POST['eventDate'] ?? '';
             $location = $_POST['location'] ?? '';

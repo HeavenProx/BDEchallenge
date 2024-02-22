@@ -68,7 +68,7 @@
         </div>
         
         <div class="flex flex-col gap-1">
-            <label for="date" class="block mb-2 text-blue-900">Date :</label>
+            <label for="date" class="block mb-2">Date :</label>
             <input value="<?php echo isset($_GET['date']) ? $_GET['date'] : date('Y-m-d'); ?>" type="date" id="date" name="date" class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
         </div>
         
