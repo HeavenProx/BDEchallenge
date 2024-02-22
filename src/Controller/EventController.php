@@ -48,9 +48,8 @@ class EventController
         // Calculer le nombre total de pages
         $_SESSION['totalPages'] = ceil(count($eventsToCome) / $eventsPerPage);
 
-        // Déterminer la page actuelle
         $currentpage = isset($_SESSION['currentPage']) ? $_SESSION['currentPage'] : 1;
-
+        
         // Calculer l'indice de début et de fin des événements à afficher pour la page actuelle
         $startIndex = ($currentpage - 1) * $eventsPerPage;
         $endIndex = min($startIndex + $eventsPerPage - 1, count($eventsToCome) - 1);
@@ -62,10 +61,11 @@ class EventController
         $eventParticipants = [];
 
         $userModel = new User();
-        if($_SESSION['logged'] == true){
+        if ($_SESSION['logged'] == true) {
             $userModel->userNumber = $_SESSION['user']['userNumber'];
         }
-        // Parcourez les événements pour déterminer quels boutons afficher
+
+        // Parcourir les événements pour déterminer quels boutons afficher
         foreach ($events as $ev) {
             $participants = $event->getParticipants($ev['eventNumber']);
             if(isset($_SESSION['logged']) && $_SESSION['logged'] == true){
@@ -79,7 +79,7 @@ class EventController
 
         }
 
-        // Incluez les utilisateurs dans la vue
+        // Incluez les events dans la vue
         $viewPath = __DIR__ . '/../View/Event/index.php';
         ob_start();  // Démarre la temporisation de sortie
         include $viewPath;  // Inclut la vue
@@ -120,7 +120,7 @@ class EventController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Récupérez les données du formulaire d'inscription
-            $name = $_POST['name'] ?? '';
+            $name = $_POST['name'] ?? '';           
             $category = $_POST['category'] ?? '';
             $eventDate = $_POST['eventDate'] ?? '';
             $location = $_POST['location'] ?? '';
@@ -297,4 +297,16 @@ class EventController
         }
     }
 
+
+    public function details($id){
+
+        $eventModel = new Event();
+        $event = $eventModel->getEventById($id);
+
+        $viewPath = __DIR__ . '/../View/Event/details.php';
+        ob_start();
+        include $viewPath;
+        $viewContent = ob_get_clean();
+        return $viewContent;
+    }
 }

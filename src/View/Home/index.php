@@ -127,7 +127,6 @@
                                 <div class="event-item rounded-4">
                                     <h3 class="fw-bold mb-5 fs-2"><?php echo $event['name'] ?></h3>
                                     <p><?php echo $event['category'] . ' à ' . $event['eventDate']?></p>
-                                    <p><?php echo $event['description'] ?></p>
                                 </div>
                             </li>
                             </swiper-slide>

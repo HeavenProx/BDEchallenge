@@ -35,27 +35,6 @@ class UserController
             $userModel = new User();
             $userModel->createUser($email, $firstName, $lastName, $password);
 
-            $content = '
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Confirmation de compte</title>
-            </head>
-            <body>
-                <h1>Confirmation de compte</h1>
-                <p>Merci de vous être inscrit! Cliquez sur le lien ci-dessous pour valider votre compte :</p>
-                <a href="http://localhost:8000/confirmation/CURRENT_ID">Valider mon compte</a>
-            </body>
-            </html>
-            ';
-            $id = $userModel->getUserId($_POST['email']);
-            $contentWithId = str_replace('CURRENT_ID', strval(reset($id)), $content);
-            
-            //Send a confirmation mail
-            $mailController = new MailController();
-            $mailController->sendMail('mathis.enrici@gmail.com', 'BEEDE', $_POST['email'], $_POST['first_name'] . $_POST['last_name'], 'Confirmation de compte', $contentWithId);
-
             header('Location: /users');
             exit;
         }
@@ -151,9 +130,6 @@ class UserController
             header('Location: /events');
             exit;
         }
-
-        // Créez une instance du modèle User
-        
     }
 
     public function removeFromWishlist($eventNumber)
