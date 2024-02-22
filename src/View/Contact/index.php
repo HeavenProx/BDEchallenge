@@ -40,11 +40,13 @@
     </style>
 </head>
 <body>
-    <h2 class="text-2xl text-center font-bold my-5">Nous envoyer un message</h2>
+    <a href="/" class="bg-yellow-500 text-dark-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4 ml-4">Accueil</a>
+
+    <h2 class="text-2xl text-center font-bold my-5">Nous envoyer un mail</h2>
 
     <form action="/contact/send" method="post" class="max-w-md mx-auto p-8 bg-white rounded-lg shadow-md">
 
-        <label for="objet" class="block mb-2 text-blue-900">Objet :</label>
+        <label for="objet" class="block mb-2 text-blue-900">Sujet :</label>
         <input type="text" id="objet" name="objet" required class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
 
         <label for="message" class="block mb-2 text-blue-900">Message :</label>

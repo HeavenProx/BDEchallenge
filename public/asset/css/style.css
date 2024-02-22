@@ -107,14 +107,14 @@ main .apropos {
   align-items: center;
   justify-content: center;
   color: #4e5152;
-  padding: 20px;
+  padding: 0 40px;
 }
 
 main .apropos h2 {
-  font-size: 40px;
+  font-size: 50px;
 }
 main .apropos h3 {
-  font-size: 50px;
+  font-size: 37px;
 }
 
 /* containerConcept */
@@ -181,10 +181,10 @@ footer div {
   }
 
   main .apropos h2 {
-    font-size: 20px;
+    font-size: 30px;
   }
   main .apropos h3 {
-    font-size: 30px;
+    font-size: 20px;
   }
 
   main .sectionChallenge {

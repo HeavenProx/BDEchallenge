@@ -44,21 +44,21 @@
 
 <div class="container mx-auto mt-8">
     <div class="flex justify-between mb-6">
-        <h1 class="text-3xl font-semibold mb-4 text-white">Liste des évévenements</h1>
+        <h1 class="text-3xl font-semibold my-4 text-white">Liste des évévenements</h1>
         <div>
         <a href="/" class="bg-yellow-500 text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4 ml-4">Accueil</a> 
             <?php if (isset($_SESSION['logged']) && $_SESSION['logged'] == true): ?>
                 <?php if($_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'BDE'): ?>
-                    <a href="/event/create" class="bg-yellow-500 text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4 ml-4">Ajouter Event</a>  
+                    <a href="/event/create" class="bg-yellow-500 text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4 ml-4">Ajouter un évènement</a>  
                 <?php endif; ?>
             <?php endif; ?> 
         </div>
     </div>
 </div>
-<div class="container mx-auto">
+<div class="container mx-auto text-primary">
     <form action="/events" class="flex gap-4 my-8 items-center">
         <div class="flex flex-col gap-1">
-            <label for="category" class="block mb-2 text-blue-900">Catégorie :</label>
+            <label for="category" class="block mb-2">Catégorie :</label>
             <select id="category" name="category" class="text-blue-900 w-full px-4 py-3 mb-4 border rounded-md">
                 <option value="All">Toutes les catégories</option>
                 <option value="Soiree">Soirée</option>
@@ -68,7 +68,7 @@
         </div>
         
         <div class="flex flex-col gap-1">
-            <label for="date" class="block mb-2 text-blue-900">Date :</label>
+            <label for="date" class="block mb-2">Date :</label>
             <input value="<?php echo date('Y-m-d') ?>" type="date" id="date" name="date" class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
         </div>
         
@@ -90,8 +90,8 @@
 
                 <?php if(isset($_SESSION['logged']) && $_SESSION['logged'] == true): ?>
                     <?php if ($_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'BDE'): ?>
-                        <a href="/event/edit/<?php echo $event['eventNumber']; ?>" class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Edit</a>
-                        <a href="/event/delete/<?php echo $event['eventNumber']; ?>" onclick="return confirm('Are you sure?')" class="bg-red-900 text-white hover:bg-blue-500 hover:text-white transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Delete</a>
+                        <a href="/event/edit/<?php echo $event['eventNumber']; ?>" class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Modifier</a>
+                        <a href="/event/delete/<?php echo $event['eventNumber']; ?>" onclick="return confirm('Are you sure?')" class="bg-red-900 text-white hover:bg-blue-500 hover:text-white transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Supprimer</a>
                     <?php endif; ?>
                 <?php endif; ?>
                 <?php if(isset($_SESSION['logged']) && $_SESSION['logged'] == true): ?>
@@ -109,8 +109,10 @@
         <?php endforeach; ?>
     </ul>
 
+    <div class="text-center mt-4">
     <a href="/events/prevp" class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Page précédente</a>
     <a href="/events/nextp" class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Page suivante</a>
+    </div>
 </div>
 
 

@@ -62,7 +62,7 @@
 
         <section class="apropos">
             <article class="presentation">
-                <h2>A propos de nous</h2>
+                <h2 class="cherry mb-5">A propos de nous</h2>
                 <h3>Butiner les moments de joie et de convivialité avec Beede, la ruche animée du BDE, où chaque abeille
                     compte!</h3>
             </article>
@@ -96,8 +96,7 @@
                 <div class="texteConcept col-md-6 col-12 p-0">
                     <div class="texteInt">
                         <h4 class="cherry">Bee-Party</h4>
-                        <p>Préparez-vous à une ambiance de folie avec les soirées Beede ! Plongez dans l'énergie
-                            débordante de nos events !!
+                        <p>Préparez-vous à une ambiance enivrante avec les soirées organisées par Beede! Plongez au cœur de l'énergie débordante de nos événements!!
                         </p>
                     </div>
                 </div>
@@ -112,8 +111,8 @@
                         <p class="mt-4">Pas encore d'évènement mais reste à l'affût !</p>
                     <?php else: ?>
                         <?php foreach ($events as $event): ?>
-                            <li class="col-lg-4 col-md-12  flex-wrap py-4">
-                                <div>
+                            <li class="col-lg-4 col-md-12 flex-wrap py-4">
+                                <div class="bg-dark rounded-4">
                                     <h3 class="fw-bold mb-5 fs-2"><?php echo $event['name'] ?></h3>
                                     <p><?php echo $event['category'] . ' à ' . $event['eventDate']?></p>
                                     <p><?php echo $event['description'] ?></p>

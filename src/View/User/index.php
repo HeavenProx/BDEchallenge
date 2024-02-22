@@ -48,7 +48,7 @@
         <h1 class="text-3xl font-semibold mb-4 text-white">Liste des Utilisateurs</h1>
         <div class="flex gap-4">
             <a href="/" class="bg-yellow-500 text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4 ml-4">Accueil</a> 
-            <a href="/user/create" class="bg-yellow-500 text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4">Add User</a>    
+            <a href="/user/create" class="bg-yellow-500 text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4">Ajouter un utilisateur</a>    
         </div>
     </div>
 
@@ -61,10 +61,10 @@
                 <?php echo $user['userNumber']; ?>
 
                 <!-- Ajoutez d'autres informations d'utilisateur si nécessaire -->
-                <a href="/user/edit/<?php echo $user['userNumber']; ?>" class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Edit</a>
+                <a href="/user/edit/<?php echo $user['userNumber']; ?>" class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Modifier</a>
 
                 <!-- Bouton de suppression -->
-                <a href="/user/delete/<?php echo $user['userNumber']; ?>" onclick="return confirm('Are you sure?')" class="bg-red-900 text-white hover:bg-blue-500 hover:text-white transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Delete</a>
+                <a href="/user/delete/<?php echo $user['userNumber']; ?>" onclick="return confirm('Are you sure?')" class="bg-red-900 text-white hover:bg-blue-500 hover:text-white transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Supprimer</a>
             </li>
         <?php endforeach; ?>
     </ul>
