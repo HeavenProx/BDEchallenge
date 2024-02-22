@@ -108,9 +108,40 @@
             </li>
         <?php endforeach; ?>
     </ul>
+    
+    <a id="paginationButton" href="/events" class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Page précédente</a>
+    <a id="paginationButton2" href="/events" class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Page suivante</a>
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            var paginationButton = document.getElementById('paginationButton');
+                paginationButton.addEventListener('click', function(event){
+                    event.preventDefault(); 
+                    var categorie = document.getElementById('category').value;
+                    var date = document.getElementById('date').value;
+                    var nextPageUrl = paginationButton.getAttribute('href');
+                    nextPageUrl += '?category=' + encodeURIComponent(categorie);
+                    nextPageUrl += '&date=' + encodeURIComponent(date);
+                    nextPageUrl += '&btn=prev';
+                    console.log(nextPageUrl);
+                    window.location.href = nextPageUrl;
+                });
+            
+            var paginationButton2 = document.getElementById('paginationButton2');
+            paginationButton2.addEventListener('click', function(event){
+                event.preventDefault(); 
+                var categorie = document.getElementById('category').value;
+                var date = document.getElementById('date').value;
+                var nextPageUrl = paginationButton2.getAttribute('href');
+                nextPageUrl += '?category=' + encodeURIComponent(categorie);
+                nextPageUrl += '&date=' + encodeURIComponent(date);
+                nextPageUrl += '&btn=next';
+                console.log(nextPageUrl);
+                window.location.href = nextPageUrl;
+            });
 
-    <a href="/events/prevp" class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Page précédente</a>
-    <a href="/events/nextp" class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Page suivante</a>
+
+        })
+    </script>
 </div>
 
 
