@@ -9,7 +9,6 @@ class EventController
 {
     public function index()
     {
-    var_dump($_SESSION['currentPage']);
 
         if($_SESSION['currentPage'] > 1 && isset($_GET['btn']) && $_GET['btn'] == "prev"){
             $_SESSION['currentPage']--;

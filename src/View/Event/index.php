@@ -60,16 +60,16 @@
         <div class="flex flex-col gap-1">
             <label for="category" class="block mb-2 text-blue-900">Catégorie :</label>
             <select id="category" name="category" class="text-blue-900 w-full px-4 py-3 mb-4 border rounded-md">
-                <option value="All">Toutes les catégories</option>
-                <option value="Soiree">Soirée</option>
-                <option value="Concert">Concert</option>
-                <option value="Cinema">Cinéma</option>
+                <option value="All" <?php if(isset($_GET['category']) && $_GET['category'] == 'All'):?> selected <?php endif ?> >Toutes les catégories</option>
+                <option value="Soiree" <?php if(isset($_GET['category']) && $_GET['category'] == 'Soiree'):?> selected <?php endif ?> >Soirée</option>
+                <option value="Concert" <?php if(isset($_GET['category']) && $_GET['category'] == 'Concert'):?> selected <?php endif ?> >Concert</option>
+                <option value="Cinema" <?php if(isset($_GET['category']) && $_GET['category'] == 'Cinema'):?> selected <?php endif ?> >Cinéma</option>
             </select>
         </div>
         
         <div class="flex flex-col gap-1">
             <label for="date" class="block mb-2 text-blue-900">Date :</label>
-            <input value="<?php echo date('Y-m-d') ?>" type="date" id="date" name="date" class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
+            <input value="<?php echo isset($_GET['date']) ? $_GET['date'] : date('Y-m-d'); ?>" type="date" id="date" name="date" class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
         </div>
         
         <div class="flex items-end">
