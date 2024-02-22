@@ -47,8 +47,10 @@
         <h1 class="text-3xl font-semibold mb-4 text-white">Liste des évévenements</h1>
         <div>
         <a href="/" class="bg-yellow-500 text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4 ml-4">Accueil</a> 
-            <?php if (isset($_SESSION['logged']) && $_SESSION['logged'] == true && isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'BDE'): ?>
-            <a href="/event/create" class="bg-yellow-500 text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4 ml-4">Ajouter Event</a>  
+            <?php if (isset($_SESSION['logged']) && $_SESSION['logged'] == true): ?>
+                <?php if($_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'BDE'): ?>
+                    <a href="/event/create" class="bg-yellow-500 text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4 ml-4">Ajouter Event</a>  
+                <?php endif; ?>
             <?php endif; ?> 
         </div>
     </div>
@@ -86,9 +88,11 @@
                 <p class="text-lg text-gray-500 mb-2"><?php echo $event['category'] . ' à ' . $event['location']; ?></p>
                 <p class="text-gray-700"><?php echo $event['description']; ?></p>
 
-                <?php if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'BDE'): ?>
-                <a href="/event/edit/<?php echo $event['eventNumber']; ?>" class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Edit</a>
-                <a href="/event/delete/<?php echo $event['eventNumber']; ?>" onclick="return confirm('Are you sure?')" class="bg-red-900 text-white hover:bg-blue-500 hover:text-white transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Delete</a>
+                <?php if(isset($_SESSION['logged']) && $_SESSION['logged'] == true): ?>
+                    <?php if ($_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'BDE'): ?>
+                        <a href="/event/edit/<?php echo $event['eventNumber']; ?>" class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Edit</a>
+                        <a href="/event/delete/<?php echo $event['eventNumber']; ?>" onclick="return confirm('Are you sure?')" class="bg-red-900 text-white hover:bg-blue-500 hover:text-white transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Delete</a>
+                    <?php endif; ?>
                 <?php endif; ?>
                 <?php if(isset($_SESSION['logged']) && $_SESSION['logged'] == true): ?>
                     <?php if (!$wishlistButtons[$event['eventNumber']]): ?>

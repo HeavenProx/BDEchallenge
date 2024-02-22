@@ -23,6 +23,14 @@
 <body>
 
     <header>
+        <script>
+            <?php if(isset($_SESSION['error'])): ?>
+                alert("Vous ne pouvez pas accéder à cette page")
+            <?php endif; ?>
+        </script>
+        <?php
+            unset($_SESSION['error']);
+        ?>
         <nav>
             <img src="img/logo.png" class="logo">
 
