@@ -164,4 +164,62 @@ class UserController
         header('Location: /');
         exit;
     }
+
+    public function addToWishlist($eventNumber)
+    {
+        // var_dump($_SESSION);// Assurez-vous que l'utilisateur est connecté et que userNumber est disponible
+        if ((isset($_SESSION['logged']) && $_SESSION['logged'] == true)) {
+            $userModel = new User();
+            $userModel->userNumber = $_SESSION['user']['userNumber'];
+
+            if (!$userModel->isInWishlist($eventNumber)) {
+                // Ajoutez l'événement à la wishlist
+                $userModel->insertIntoWishlist($eventNumber);
+            }
+            header('Location: /events');
+            exit;
+        }
+
+        // Créez une instance du modèle User
+        
+    }
+
+    public function removeFromWishlist($eventNumber)
+    {
+        // Assurez-vous que l'utilisateur est connecté et que userNumber est disponible
+        if ((isset($_SESSION['logged']) && $_SESSION['logged'] == true)) {
+            $userModel = new User();
+            $userModel->userNumber = $_SESSION['user']['userNumber'];
+
+            if ($userModel->isInWishlist($eventNumber)) {
+                // Ajoutez l'événement à la wishlist
+                $userModel->deleteFromWishlist($eventNumber);
+            }
+            header('Location: /events');
+            exit;
+        }
+    }
+
+    public function wishlist()
+    {
+        // Assurez-vous que l'utilisateur est connecté et que userNumber est disponible
+        if (isset($_SESSION['userNumber'])) {
+            // Créez une instance du modèle User
+        $userModel = new User();
+        $userModel->userNumber = $_SESSION['userNumber'];
+
+        // Obtenez la wishlist de l'utilisateur
+        $wishlist = $userModel->getWishlist();
+
+        // Affichez la wishlist dans la vue (à implémenter)
+        // ...
+
+        // Vous pouvez également rediriger l'utilisateur si nécessaire
+        header('Location: /events');
+        exit;
+        }
+
+        
+    }
+    
 }

@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Model;
+use App\Model\Event;
 
 class User extends BaseModel
 {
+    public $userNumber;
     public function createUser($email, $firstName, $lastName, $password, $defaultRole = 'Etudiant')
     {
         // Hasher le mot de passe (vous devez implémenter une fonction de hachage sécurisée)
@@ -85,5 +87,40 @@ class User extends BaseModel
     {
         $stmt = $this->db->prepare("UPDATE User SET validated = 1 WHERE userNumber = ?");
         $stmt->execute([$userId]);
+    }
+
+    public function isInWishlist($eventNumber)
+    {
+        $eventNumber = is_array($eventNumber) ? reset($eventNumber) : $eventNumber;        
+        $stmt = $this->db->prepare("SELECT * FROM wishlist WHERE userNumber = ? AND eventNumber = ?");
+        $stmt->execute([$this->userNumber, $eventNumber]);
+        return $stmt->fetch() !== false;
+    }
+
+    public function insertIntoWishlist($eventNumber)
+    {
+        $eventNumber = is_array($eventNumber) ? reset($eventNumber) : $eventNumber;        
+        $stmt = $this->db->prepare("INSERT INTO wishlist (userNumber, eventNumber) VALUES (?, ?)");
+        $stmt->execute([$this->userNumber, $eventNumber]);
+    }
+
+    public function deleteFromWishlist($eventNumber)
+    {
+        $eventNumber = is_array($eventNumber) ? reset($eventNumber) : $eventNumber;        
+        $stmt = $this->db->prepare("DELETE FROM wishlist WHERE userNumber = ? AND eventNumber = ?");
+        $stmt->execute([$this->userNumber, $eventNumber]);
+    }
+
+    public function getWishlist() {
+        // Assurez-vous que $this->userNumber est défini
+        if (isset($this->userNumber)) {
+            $stmt = $this->db->prepare("SELECT * FROM wishlist WHERE userNumber = ?");
+            $stmt->execute([$this->userNumber]);
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        } else {
+            // Gérez le cas où $this->userNumber n'est pas défini
+            // Peut-être générer une erreur ou logguer un avertissement
+            return [];
+        }
     }
 }
