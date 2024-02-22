@@ -9,7 +9,15 @@ class EventController
 {
     public function index()
     {
-        
+
+        if($_SESSION['currentPage'] > 1 && isset($_GET['btn']) && $_GET['btn'] == "prev"){
+            $_SESSION['currentPage']--;
+        }
+
+        if($_SESSION['currentPage'] < $_SESSION['totalPages'] && isset($_GET['btn']) && $_GET['btn'] == "next"){
+            $_SESSION['currentPage']++;
+        }
+
         $event = new Event();
         $allEvents = $event->getAllEvents();
         // var_dump($allEvents);
