@@ -15,14 +15,22 @@
          ?>
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
     <title>BDE</title>
 </head>
 
 <body>
 
     <header>
+        <script>
+            <?php if(isset($_SESSION['error'])): ?>
+                alert("Vous ne pouvez pas accéder à cette page")
+            <?php endif; ?>
+        </script>
+        <?php
+            unset($_SESSION['error']);
+        ?>
         <nav>
             <img src="img/logo.png" class="logo">
 
@@ -32,6 +40,9 @@
                     <?php if(isset($_SESSION['logged']) && $_SESSION['logged'] == true): ?>
                         <li><a href="/profil"><button class="btn border"><?php echo $_SESSION['user']['firstName'] . " " . $_SESSION['user']['lastName'] ?></button></a></li>
                         <li><a href="/logout"><button class="btn border">Se déconnecter</button></a></li>
+                        <?php if($_SESSION['user']['role'] == "Admin"): ?>
+                            <li><a href="/users"><button class="btn border">Panneau d'administration</button></a></li>
+                        <?php endif; ?>
                     <?php else: ?>
                         <li><a href="/login"><button class="btn border">Se connecter</button></a></li>
                         <li> <a href="/register"><button class="btn border">S'inscrire</button></a></li>

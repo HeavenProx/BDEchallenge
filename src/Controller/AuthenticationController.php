@@ -108,6 +108,11 @@ class AuthenticationController {
 
         $viewPath = __DIR__ . '/../View/Authentication/confirmation.php';
         $viewContent = file_get_contents($viewPath);
+
+        $user = $userModel->getUserById($id);
+        $mailController = new MailController();
+        $mailController->sendMail($user['email'], $user['lastName'] . " " . $user['firstName'], 'mathis.enrici@gmail.com', 'BEEDE', 'Confirmation de compte', $user['lastName'] . " " . $user['firstName'] . ' a confirmé son compte !');
+
         return $viewContent;
     }
 
