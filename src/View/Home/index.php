@@ -124,10 +124,12 @@
                         <?php foreach ($events as $event): ?>
                             <swiper-slide>
                             <li class="col">
-                                <div class="event-item rounded-4">
-                                    <h3 class="fw-bold mb-5 fs-2"><?php echo $event['name'] ?></h3>
-                                    <p><?php echo $event['category'] . ' à ' . $event['eventDate']?></p>
-                                </div>
+                                <a href="/event/details/<?php echo $event['eventNumber']; ?>">
+                                    <div class="event-item rounded-4">
+                                        <h3 class="fw-bold mb-5 fs-2"><?php echo $event['name'] ?></h3>
+                                        <p><?php echo $event['category'] . ' à ' . $event['eventDate']?></p>
+                                    </div>
+                                </a>
                             </li>
                             </swiper-slide>
                         <?php endforeach; ?>
