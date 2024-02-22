@@ -83,10 +83,12 @@
 <!-- Affichage des utilisateurs -->
 <ul id="events-list" class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
     <?php foreach ($events as $event): ?>
+        
         <li class="bg-white p-4 rounded shadow">
-            <p class="text-xl font-bold mb-2 text-gray-800"><?php echo $event['name'] . ' - ' . $event['eventDate']; ?></p>
+            
+            <p class="text-xl font-bold mb-2 text-gray-800"><a href="/event/details/<?php echo $event['eventNumber']; ?>" class="border-black border-b-2"><?php echo $event['name'] . ' - ' . $event['eventDate']; ?></a></p>
+            
             <p class="text-lg text-gray-500 mb-2"><?php echo $event['category'] . ' à ' . $event['location']; ?></p>
-            <p class="text-gray-700"><?php echo $event['description']; ?></p>
 
             <?php if(isset($_SESSION['logged']) && $_SESSION['logged'] == true): ?>
                 <?php if ($_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'BDE'): ?>
@@ -114,6 +116,7 @@
                 <a href="/login"><button class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Se connecter pour participer</button></a>
             <?php endif; ?>
         </li>
+        
     <?php endforeach; ?>
 </ul>
 <div class="container mx-auto">

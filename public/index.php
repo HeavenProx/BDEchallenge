@@ -132,6 +132,13 @@ $router
         new Route('/event/delete/{id}', 'delete', 'GET', EventController::class, 'delete')
     )
     ->addRoute(
+        new Route('/event/details/{id}', 'details', 'GET', EventController::class, 'details')
+    )
+
+
+
+    // Route profil des utilisateurs
+    ->addRoute(
         new Route('/profil', 'profil', 'GET', ProfilController::class, 'profil')
     )
     ->addRoute(

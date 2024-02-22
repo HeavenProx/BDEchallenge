@@ -6,7 +6,7 @@ use App\Model\Profil;
 
 class ProfilController
 {
-     public function profil()
+    public function profil()
     {
         ob_start();
         require 'src/View/Profil/index.php';

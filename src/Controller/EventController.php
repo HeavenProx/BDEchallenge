@@ -53,22 +53,23 @@ class EventController
         $eventParticipants = [];
 
         $userModel = new User();
-        if($_SESSION['logged'] == true){
+        if ($_SESSION['logged'] == true) {
             $userModel->userNumber = $_SESSION['user']['userNumber'];
         }
-        // Parcourez les événements pour déterminer quels boutons afficher
+
+        // Parcourir les événements pour déterminer quels boutons afficher
         foreach ($events as $ev) {
             $participants = $event->getParticipants($ev['eventNumber']);
 
             $isParticipant = in_array($_SESSION['user']['userNumber'], $participants);
             $isInWishlist = $userModel->isInWishlist($ev['eventNumber']);
-            // Stockez l'information pour chaque événement
+
+            // Stocker l'information pour chaque événement
             $wishlistButtons[$ev['eventNumber']] = $isInWishlist;
             $eventParticipants[$ev['eventNumber']] = $isParticipant;
-
         }
 
-        // Incluez les utilisateurs dans la vue
+        // Incluez les events dans la vue
         $viewPath = __DIR__ . '/../View/Event/index.php';
         ob_start();  // Démarre la temporisation de sortie
         include $viewPath;  // Inclut la vue
@@ -229,4 +230,16 @@ class EventController
         $this->handleParticipantAction($id, 'remove');
     }
 
+
+    public function details($id){
+
+        $eventModel = new Event();
+        $event = $eventModel->getEventById($id);
+
+        $viewPath = __DIR__ . '/../View/Event/details.php';
+        ob_start();
+        include $viewPath;
+        $viewContent = ob_get_clean();
+        return $viewContent;
+    }
 }

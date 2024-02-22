@@ -113,15 +113,14 @@
                         <?php foreach ($events as $event): ?>
                             <li class="col-lg-4 col-md-12 flex-wrap py-4">
                                 <div class="bg-dark rounded-4">
-                                    <h3 class="fw-bold mb-5 fs-2"><?php echo $event['name'] ?></h3>
-                                    <p><?php echo $event['category'] . ' à ' . $event['eventDate']?></p>
-                                    <p><?php echo $event['description'] ?></p>
+                                    <h3 class="fw-bold mb-5 fs-2"><?php echo $event['name'] . ' - ' . $event['eventDate']?></h3>
+                                    <p><?php echo $event['category'] . ' à ' . $event['location']?></p>
                                 </div>
                             </li>
                         <?php endforeach; ?>
                     <?php endif; ?>
                 </ul>
-                <a href="/events"><button class="btn border btnEvent">Tout nos évènements</button></a>
+                <a href="/events"><button class="btn border btnEvent">Tous nos évènements</button></a>
             </div>
                
         </section>
