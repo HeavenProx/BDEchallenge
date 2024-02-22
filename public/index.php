@@ -101,6 +101,12 @@ $router
         new Route('/events', 'events', 'GET', EventController::class, 'index')
     )
     ->addRoute(
+        new Route('/events/prevp', 'prevp', 'GET', EventController::class, 'prevp')
+    )
+    ->addRoute(
+        new Route('/events/nextp', 'nextp', 'GET', EventController::class, 'nextp')
+    )
+    ->addRoute(
         new Route('/event/create', 'create', 'GET', EventController::class, 'create')
     )
     ->addRoute(
@@ -120,7 +126,8 @@ $router
     'REQUEST_URI'    => $uri,
     'REQUEST_METHOD' => $httpMethod
 ] = $_SERVER;
-
+// var_dump($_SERVER);
+$uri = explode('?', $uri)[0];
 try {
     echo $router->execute($uri, $httpMethod);
 } catch (RouteNotFoundException $e) {

@@ -9,25 +9,56 @@ class EventController
 {
     public function index()
     {
-        $event = new Event();
-        $events = $event->getAllEvents();
         
-        $wishlistButtons = [];
-
-        // Vérifiez si l'utilisateur est connecté
-        if (isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
-            $userModel = new User();
-            $userModel->userNumber = $_SESSION['user']['userNumber'];
-
-            // Parcourez les événements pour déterminer quels boutons afficher
-            foreach ($events as $event) {
-                $isInWishlist = $userModel->isInWishlist($event['eventNumber']);
-
-                // Stockez l'information pour chaque événement
-                $wishlistButtons[$event['eventNumber']] = $isInWishlist;
+        $event = new Event();
+        $allEvents = $event->getAllEvents();
+        // var_dump($allEvents);
+        $eventsToCome = [];
+        foreach ($allEvents as $e) {
+            if(isset($_GET['category']) && isset($_GET['date'])){
+                if($_GET['category'] == "All"){
+                    if($e['eventDate'] >= $_GET['date']){
+                        $eventsToCome[] = $e;
+                    }
+                }else {
+                    if($e['eventDate'] >= $_GET['date'] && $e['category'] == $_GET['category']){
+                        $eventsToCome[] = $e;
+                    }
+                }
+            } else {
+                if($e['eventDate'] >= date('Y-m-d')){
+                    $eventsToCome[] = $e;
+                }
             }
+            
         }
 
+        // Définir le nombre d'événements par page
+        $eventsPerPage = 9;
+
+        // Calculer le nombre total de pages
+        $_SESSION['totalPages'] = ceil(count($eventsToCome) / $eventsPerPage);
+
+        // Déterminer la page actuelle
+        $currentpage = isset($_SESSION['currentPage']) ? $_SESSION['currentPage'] : 1;
+
+        // Calculer l'indice de début et de fin des événements à afficher pour la page actuelle
+        $startIndex = ($currentpage - 1) * $eventsPerPage;
+        $endIndex = min($startIndex + $eventsPerPage - 1, count($eventsToCome) - 1);
+
+        // Extraire les événements à afficher pour la page actuelle
+        $events = array_slice($eventsToCome, $startIndex, $endIndex - $startIndex + 1);
+
+        $wishlistButtons = [];
+        
+        $userModel = new User();
+        $userModel->userNumber = $_SESSION['user']['userNumber'];
+        // Parcourez les événements pour déterminer quels boutons afficher
+        foreach ($events as $ev) {
+            $isInWishlist = $userModel->isInWishlist($ev['eventNumber']);
+            // Stockez l'information pour chaque événement
+            $wishlistButtons[$ev['eventNumber']] = $isInWishlist;
+        }
 
         // Incluez les utilisateurs dans la vue
         $viewPath = __DIR__ . '/../View/Event/index.php';
@@ -36,6 +67,22 @@ class EventController
         $viewContent = ob_get_clean();  // Récupère le contenu de la temporisation de sortie et l'efface
 
         return $viewContent;
+    }
+
+    public function nextp() {
+        if($_SESSION['currentPage'] < $_SESSION['totalPages']){
+            $_SESSION['currentPage']++;
+        }
+        header('Location: /events');
+        exit;
+    }
+
+    public function prevp() {
+        if($_SESSION['currentPage'] > 1){
+            $_SESSION['currentPage']--;
+        }
+        header('Location: /events');
+        exit;
     }
 
     public function create(){
