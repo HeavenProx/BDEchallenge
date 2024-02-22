@@ -12,6 +12,7 @@ use App\Routing\Exception\RouteNotFoundException;
 use App\Routing\Route;
 use App\Routing\Router;
 use App\Database\DBConnector; // Importez la classe DBConnector
+use App\Model\Event;
 
 session_start();
 // $_SESSION['logged'] = false;
@@ -157,3 +158,8 @@ try {
     http_response_code(500);
     echo "Erreur interne : " . $e->getMessage();
 }
+
+//Commentaire à laisser pour la présentation :)
+// $eventCheck = new EventController();
+// $eventCheck->notifParticipants();
+// $eventCheck->notifCreator();
