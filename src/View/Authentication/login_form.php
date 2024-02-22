@@ -40,6 +40,8 @@
     </style>
 </head>
 <body>
+    <a href="/" class="bg-yellow-500 text-left text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block my-4 mx-5">Accueil</a>
+
     <h2 class="text-2xl font-bold mb-4 text-center mt-8">Connexion</h2>
 
     <div>

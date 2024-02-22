@@ -40,6 +40,8 @@
     </style>
 </head>
 <body>
-    <h2 class="text-2xl font-bold mb-4">Confirmation compte validé</h2>
+    <a href="/" class="bg-yellow-500 text-right text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block my-4 mx-5">Accueil</a>
+
+    <h2 class="text-2xl mx-5 font-bold mb-4">Confirmation compte validé</h2>
 </body>
 </html>
