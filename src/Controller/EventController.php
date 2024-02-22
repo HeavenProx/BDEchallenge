@@ -4,12 +4,21 @@ namespace App\Controller;
 
 use App\Model\Event;
 use App\Model\User;
+use DateTime;
 
 class EventController
 {
     public function index()
     {
-        
+
+        if($_SESSION['currentPage'] > 1 && isset($_GET['btn']) && $_GET['btn'] == "prev"){
+            $_SESSION['currentPage']--;
+        }
+
+        if($_SESSION['currentPage'] < $_SESSION['totalPages'] && isset($_GET['btn']) && $_GET['btn'] == "next"){
+            $_SESSION['currentPage']++;
+        }
+
         $event = new Event();
         $allEvents = $event->getAllEvents();
         // var_dump($allEvents);
@@ -60,13 +69,15 @@ class EventController
         // Parcourir les événements pour déterminer quels boutons afficher
         foreach ($events as $ev) {
             $participants = $event->getParticipants($ev['eventNumber']);
+            if(isset($_SESSION['logged']) && $_SESSION['logged'] == true){
+                $isParticipant = in_array($_SESSION['user']['userNumber'], $participants);
+                $isInWishlist = $userModel->isInWishlist($ev['eventNumber']);
+                // Stockez l'information pour chaque événement
+                $wishlistButtons[$ev['eventNumber']] = $isInWishlist;
+                $eventParticipants[$ev['eventNumber']] = $isParticipant;
+            }
+            
 
-            $isParticipant = in_array($_SESSION['user']['userNumber'], $participants);
-            $isInWishlist = $userModel->isInWishlist($ev['eventNumber']);
-
-            // Stocker l'information pour chaque événement
-            $wishlistButtons[$ev['eventNumber']] = $isInWishlist;
-            $eventParticipants[$ev['eventNumber']] = $isParticipant;
         }
 
         // Incluez les events dans la vue
@@ -228,6 +239,63 @@ class EventController
     public function removeParticipant($id)
     {
         $this->handleParticipantAction($id, 'remove');
+    }
+
+    public function notifDaily()
+    {
+        $file = '../Mail/test_last_exec.txt';
+        if(file_exists($file) && time() - filemtime($file) >= 1){
+            $this->notifParticipants();
+            $this->notifCreator();
+
+            file_put_contents($file, time());
+        }
+    }
+
+    public function notifParticipants(){
+        $event = new Event();
+        $allEvents = $event->getAllEvents();
+
+        foreach ($allEvents as $e) {
+            $date_demain = new DateTime('tomorrow');
+            $date_a_verifier = $e['eventDate'];
+            $date_a_verifier = new DateTime($date_a_verifier);
+
+            if($date_demain->diff($date_a_verifier)->days == 0){
+                $participantsId = $event->getParticipants($e['eventNumber']);
+                foreach ($participantsId as $p) {
+                    $user = new User();
+                    $participant = $user->getUserById($p);
+                    $mailer = new MailController();
+                    $mailer->sendMail('mathis.enrici@gmail.com', 'BEEDE', $participant['email'], $participant['firstName'] . ' ' . $participant['lastName'], 'Evenement demain', 'Bonjour votre evenement ' . $e['name'] . ' est demain');
+    
+                }
+            }
+                
+        }
+    }
+
+    public function notifCreator(){
+        $event = new Event();
+        $allEvents = $event->getAllEvents();
+
+        foreach ($allEvents as $e) {
+            $date_5 = new DateTime('+4 day');
+            $date_a_verifier = $e['eventDate'];
+            $date_a_verifier = new DateTime($date_a_verifier);
+            $nbParticipants = $event->getParticipants($e['eventNumber']);
+            //var_dump($e['name']);
+            //var_dump($date_5->diff($date_a_verifier)->days == 0);
+            //var_dump($date_5->diff($date_a_verifier)->days);
+            if($date_5->diff($date_a_verifier)->days == 0 && $nbParticipants == []){
+                $user = new User();
+                $participantId = $e['userNumber'];
+                $participant = $user->getUserById($participantId);
+                $mailer = new MailController();
+                $mailer->sendMail('mathis.enrici@gmail.com', 'BEEDE', $participant['email'], $participant['firstName'] . ' ' . $participant['lastName'], 'Votre evenement', 'Bonjour votre evenement ' . $e['name'] . ' n\'a pas de participants et il est dans 5 jours');
+            }
+                
+        }
     }
 
 
