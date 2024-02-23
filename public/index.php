@@ -135,6 +135,9 @@ $router
     ->addRoute(
         new Route('/event/details/{id}', 'details', 'GET', EventController::class, 'details')
     )
+    ->addRoute(
+        new Route('/event/daily', 'daily', 'GET', EventController::class, 'notifDaily')
+    )
 
 
 
