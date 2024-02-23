@@ -126,12 +126,8 @@ class UserController
     // Prepare l'ajout dans la wishlist
     public function addToWishlist($eventNumber)
     {
-<<<<<<< HEAD
-        if ((isset($_SESSION['logged']) && $_SESSION['logged'] == true)) {
-=======
         // var_dump($_SESSION);// Assurez-vous que l'utilisateur est connecté et que userNumber est disponible
         if ((isset($_SESSION['logged']) && $_SESSION['logged'] == true && $_SESSION['user']['validated'] == 1)) {
->>>>>>> 2c3a7992605e9a647965a767f483f7d1c5ba7eda
             $userModel = new User();
             $userModel->userNumber = $_SESSION['user']['userNumber'];
 
