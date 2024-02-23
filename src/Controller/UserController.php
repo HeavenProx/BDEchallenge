@@ -7,6 +7,30 @@ use App\Model\Profil;
 
 class UserController
 {
+
+    // Envoie sur la page où se trouve tous les users
+    public function index()
+    {
+        if(isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'Admin'){
+
+        // CHarge tous les users
+        $user = new User();
+        $users = $user->getAllUsers();
+
+        // Incluez les utilisateurs dans la vue
+        $viewPath = __DIR__ . '/../View/User/index.php';
+        ob_start();  // Démarre la temporisation de sortie
+        include $viewPath;  // Inclut la vue
+        $viewContent = ob_get_clean();  // Récupère le contenu de la temporisation de sortie et l'efface
+
+        return $viewContent;
+        } else{
+            $_SESSION['error'] = "Vous ne pouvez pas accedé à cette page";
+            header('Location: /');
+        }
+    }
+
+    // Envoie sur la page de creation de compte
     public function create()
     {
         if(isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'Admin'){
@@ -20,7 +44,7 @@ class UserController
         }
     }
 
-
+    // Prepare la requete pour enregistrer un nouvel utilisateur 
     public function register()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -43,10 +67,12 @@ class UserController
         echo 'Vous êtes bien inscrit !';
     }
 
+    // Envoie sur la page de modification de l'utilisateur
     public function edit($id)
     {
         if(isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'Admin'){
 
+            // Cherche le user par son id
             $userModel = new User();
             $user = $userModel->getUserById($id);
 
@@ -61,6 +87,8 @@ class UserController
             header('Location: /');
         }
     }
+
+    // Prepare la requete de modification de l'utilisateur
     public function update($id)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -81,6 +109,7 @@ class UserController
         }
     }
 
+    // Prepare la suppression de l'utilisateur dans la bdd
     public function delete($id)
     {
         if(isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'Admin'){
@@ -97,28 +126,10 @@ class UserController
             header('Location: /');
         }
     }
-    public function index()
-    {
-        if(isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'Admin'){
-        $user = new User();
-        $users = $user->getAllUsers();
 
-        // Incluez les utilisateurs dans la vue
-        $viewPath = __DIR__ . '/../View/User/index.php';
-        ob_start();  // Démarre la temporisation de sortie
-        include $viewPath;  // Inclut la vue
-        $viewContent = ob_get_clean();  // Récupère le contenu de la temporisation de sortie et l'efface
-
-        return $viewContent;
-        } else{
-            $_SESSION['error'] = "Vous ne pouvez pas accedé à cette page";
-            header('Location: /');
-        }
-    }
-
+    // Prepare l'ajout dans la wishlist
     public function addToWishlist($eventNumber)
     {
-        // var_dump($_SESSION);// Assurez-vous que l'utilisateur est connecté et que userNumber est disponible
         if ((isset($_SESSION['logged']) && $_SESSION['logged'] == true)) {
             $userModel = new User();
             $userModel->userNumber = $_SESSION['user']['userNumber'];
@@ -132,6 +143,7 @@ class UserController
         }
     }
 
+    // Prepare la suppression dans la wishlist
     public function removeFromWishlist($eventNumber)
     {
         // Assurez-vous que l'utilisateur est connecté et que userNumber est disponible
@@ -166,8 +178,5 @@ class UserController
         header('Location: /events');
         exit;
         }
-
-        
     }
-    
 }

@@ -10,7 +10,6 @@ class EventController
 {
     public function index()
     {
-
         if($_SESSION['currentPage'] > 1 && isset($_GET['btn']) && $_GET['btn'] == "prev"){
             $_SESSION['currentPage']--;
         }
@@ -21,7 +20,8 @@ class EventController
 
         $event = new Event();
         $allEvents = $event->getAllEvents();
-        // var_dump($allEvents);
+        
+        // Trie par date et categorie
         $eventsToCome = [];
         foreach ($allEvents as $e) {
             if(isset($_GET['category']) && isset($_GET['date'])){
@@ -75,8 +75,6 @@ class EventController
                 $wishlistButtons[$ev['eventNumber']] = $isInWishlist;
                 $eventParticipants[$ev['eventNumber']] = $isParticipant;
             }
-            
-
         }
 
         // Incluez les events dans la vue
@@ -88,6 +86,7 @@ class EventController
         return $viewContent;
     }
 
+    // Passer a la prochaine page 
     public function nextp() {
         if($_SESSION['currentPage'] < $_SESSION['totalPages']){
             $_SESSION['currentPage']++;
@@ -96,6 +95,7 @@ class EventController
         exit;
     }
 
+    // Passer a la page d'avant
     public function prevp() {
         if($_SESSION['currentPage'] > 1){
             $_SESSION['currentPage']--;
@@ -104,6 +104,7 @@ class EventController
         exit;
     }
 
+    // Acceder ou non a la page des events
     public function create(){
         if(isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'BDE'){
             ob_start();
@@ -116,6 +117,7 @@ class EventController
         }
     }
 
+    // Preparer l'envoie de la requete pour creer un evenement
     public function register()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -127,8 +129,8 @@ class EventController
             $description = $_POST['description'] ?? '';
 
             if(isset($_SESSION['logged']) && $_SESSION['logged'] == true){
-                // Validez les données d'inscription (ajoutez des validations supplémentaires selon vos besoins)
-                // Enregistrez l'utilisateur dans la base de données
+
+                // Envoie de la requete
                 $eventModel = new Event();
                 $eventModel->createEvent($name, $category, $eventDate, $location, $description, $_SESSION['user']['userNumber']);
 
@@ -141,9 +143,12 @@ class EventController
         }
     }
 
+    // Acceder a la page de modification des evenements
     public function edit($id)
     {
         if(isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'BDE'){
+
+        // Recupere l'id de l'evenement selectionne
         $eventModel = new Event();
         $event = $eventModel->getEventById($id);
 
@@ -159,6 +164,7 @@ class EventController
         }
     }
 
+    // Prepare la requete pour mettre a jour un evenement
     public function update($id)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -179,13 +185,16 @@ class EventController
         }
     }
 
+    // Prepare la requete pour supprimer un evenement
     public function delete($id)
     {
         if(isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'BDE'){
+
         // Utilisez l'$id pour supprimer l'utilisateur de la base de données
         $eventModel = new Event();
         $eventModel->deleteEvent($id);
-        // Redirigez l'utilisateur vers la liste des utilisateurs ou effectuez toute autre action souhaitée
+
+        // Redirigez l'utilisateur vers la liste des evenements
         header('Location: /events');
         } else{
             $_SESSION['error'] = "Vous ne pouvez pas accedé à cette page";
@@ -193,48 +202,51 @@ class EventController
         }
     }
 
+    // Gere l'ajout ou la suppression d'un participation en fonction de l'action
     private function handleParticipantAction($id, $action)
-{
-    if (isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
-        $eventModel = new Event();
+    {
+        if (isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
+            $eventModel = new Event();
 
-        // Assurez-vous que l'utilisateur est connecté et que userNumber est disponible
-        if (isset($_SESSION['user']['userNumber'])) {
-            $eventModel->userNumber = $_SESSION['user']['userNumber']; // Assurez-vous d'ajuster la clé en fonction de votre structure de session
+            // Assurez-vous que l'utilisateur est connecté et que userNumber est disponible
+            if (isset($_SESSION['user']['userNumber'])) {
+                $eventModel->userNumber = $_SESSION['user']['userNumber']; // Assurez-vous d'ajuster la clé en fonction de votre structure de session
+            } else {
+                // Gérez le cas où userNumber n'est pas disponible
+                // Vous pouvez rediriger l'utilisateur vers une page d'erreur par exemple
+                header('Location: /error');
+                exit;
+            }
+
+            switch ($action) {
+                case 'add':
+                    $eventModel->addParticipant($id);
+                    break;
+                case 'remove':
+                    $eventModel->deleteParticipant($id);
+                    break;
+                default:
+                    // Gérer une action non valide
+                    break;
+            }
+
+            // Redirigez l'utilisateur ou effectuez toute autre action souhaitée
+            header('Location: /events');
+            exit;
         } else {
-            // Gérez le cas où userNumber n'est pas disponible
-            // Vous pouvez rediriger l'utilisateur vers une page d'erreur par exemple
-            header('Location: /error');
+            // Redirigez l'utilisateur vers la page de connexion s'il n'est pas connecté
+            header('Location: /login');
             exit;
         }
-
-        switch ($action) {
-            case 'add':
-                $eventModel->addParticipant($id);
-                break;
-            case 'remove':
-                $eventModel->deleteParticipant($id);
-                break;
-            default:
-                // Gérer une action non valide
-                break;
-        }
-
-        // Redirigez l'utilisateur ou effectuez toute autre action souhaitée
-        header('Location: /events');
-        exit;
-    } else {
-        // Redirigez l'utilisateur vers la page de connexion s'il n'est pas connecté
-        header('Location: /login');
-        exit;
     }
-}
 
+    // Ordonne l'ajout du participant
     public function addParticipant($id)
     {
         $this->handleParticipantAction($id, 'add');
     }
 
+    // Ordonne la suppression du participant
     public function removeParticipant($id)
     {
         $this->handleParticipantAction($id, 'remove');
@@ -274,6 +286,7 @@ class EventController
         }
     }
 
+    // Envoie un mail au createur de l'evenement
     public function notifCreator(){
         $event = new Event();
         $allEvents = $event->getAllEvents();
@@ -298,6 +311,7 @@ class EventController
     }
 
 
+    // Affiche la page de detail d'un evenement
     public function details($id){
 
         $eventModel = new Event();
