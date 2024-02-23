@@ -47,11 +47,15 @@
                     <a href="/contact" class="hover:text-yellow-500 transition">Nous Contactez</a>
                 </div>
             </div>
-            <?php if (isset($_SESSION['logged']) && $_SESSION['logged'] == true): ?>
-                <?php if($_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'BDE'): ?>
-                    <a href="/event/create" class="bg-yellow-500 text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4 ml-4">Ajouter un évènement</a>  
-                <?php endif; ?>
-            <?php endif; ?> 
+            
+                <?php if (isset($_SESSION['logged']) && $_SESSION['logged'] == true): ?>
+                    <?php if($_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'BDE'): ?>
+                        <div class="flex justify-end">
+                            <a href="/event/create" class="bg-yellow-500 text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4 ml-4 w-52">Ajouter un évènement</a>
+                        </div>
+                    <?php endif; ?>
+                <?php endif; ?> 
+            
         </div>
     </header>
     

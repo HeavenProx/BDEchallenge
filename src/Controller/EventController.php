@@ -20,8 +20,10 @@ class EventController
 
         $event = new Event();
         $allEvents = $event->getAllEvents();
-        
-        // Trie par date et categorie
+        usort($allEvents, function($a, $b) {
+            return strtotime($a['eventDate']) - strtotime($b['eventDate']);
+        });
+        // var_dump($allEvents);
         $eventsToCome = [];
         foreach ($allEvents as $e) {
             if(isset($_GET['category']) && isset($_GET['date'])){
@@ -254,13 +256,8 @@ class EventController
 
     public function notifDaily()
     {
-        $file = '../Mail/test_last_exec.txt';
-        if(file_exists($file) && time() - filemtime($file) >= 1){
-            $this->notifParticipants();
-            $this->notifCreator();
-
-            file_put_contents($file, time());
-        }
+        $this->notifParticipants();
+        $this->notifCreator();
     }
 
     public function notifParticipants(){

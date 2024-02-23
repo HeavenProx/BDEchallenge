@@ -106,8 +106,8 @@
                         <p class="mt-4">Pas encore d'évènement mais reste à l'affût !</p>
                     <?php else: ?>
                         <swiper-container
-                            slides-per-view="3"
-                            :breakpoints='{
+                            space-between="10",
+                            breakpoints='{
                                 "640": {
                                     "slidesPerView": 1,
                                     "spaceBetween": 10
@@ -123,8 +123,8 @@
                             }'>
                         <?php foreach ($events as $event): ?>
                             <swiper-slide>
-                            <li class="col">
-                                <a href="/event/details/<?php echo $event['eventNumber']; ?>">
+                            <li>
+                                <a href="/event/details/<?php echo $event['eventNumber']; ?>" class="d-inline">
                                     <div class="event-item rounded-4">
                                         <h3 class="fw-bold mb-5 fs-2"><?php echo $event['name'] ?></h3>
                                         <p><?php echo $event['category'] . ' à ' . $event['eventDate']?></p>
