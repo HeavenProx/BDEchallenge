@@ -40,8 +40,11 @@
     </style>
 </head>
 <body>
-    <a href="/" class="bg-yellow-500 text-dark-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4 ml-4">Accueil</a>
-
+    <header class="container mx-auto">
+        <div class="w-20 h-20">
+            <a href="/"><img src="img/logo.png" alt="" class="object-cover w-full h-full"></a>
+        </div>
+    </header>
     <h2 class="text-2xl text-center font-bold my-5">Nous envoyer un mail</h2>
 
     <form action="/contact/send" method="post" class="max-w-md mx-auto p-8 bg-white rounded-lg shadow-md">

@@ -119,7 +119,7 @@ class UserController
     public function addToWishlist($eventNumber)
     {
         // var_dump($_SESSION);// Assurez-vous que l'utilisateur est connecté et que userNumber est disponible
-        if ((isset($_SESSION['logged']) && $_SESSION['logged'] == true)) {
+        if ((isset($_SESSION['logged']) && $_SESSION['logged'] == true && $_SESSION['user']['validated'] == 1)) {
             $userModel = new User();
             $userModel->userNumber = $_SESSION['user']['userNumber'];
 
@@ -135,7 +135,7 @@ class UserController
     public function removeFromWishlist($eventNumber)
     {
         // Assurez-vous que l'utilisateur est connecté et que userNumber est disponible
-        if ((isset($_SESSION['logged']) && $_SESSION['logged'] == true)) {
+        if ((isset($_SESSION['logged']) && $_SESSION['logged'] == true && $_SESSION['user']['validated'] == 1)) {
             $userModel = new User();
             $userModel->userNumber = $_SESSION['user']['userNumber'];
 

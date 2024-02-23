@@ -71,7 +71,7 @@ class EventController
         // Parcourir les événements pour déterminer quels boutons afficher
         foreach ($events as $ev) {
             $participants = $event->getParticipants($ev['eventNumber']);
-            if(isset($_SESSION['logged']) && $_SESSION['logged'] == true){
+            if(isset($_SESSION['logged']) && $_SESSION['logged'] == true && $_SESSION['user']['validated'] == 1){
                 $isParticipant = in_array($_SESSION['user']['userNumber'], $participants);
                 $isInWishlist = $userModel->isInWishlist($ev['eventNumber']);
                 // Stockez l'information pour chaque événement
@@ -129,7 +129,7 @@ class EventController
             $location = $_POST['location'] ?? '';
             $description = $_POST['description'] ?? '';
 
-            if(isset($_SESSION['logged']) && $_SESSION['logged'] == true){
+            if(isset($_SESSION['logged']) && $_SESSION['logged'] == true && $_SESSION['user']['validated'] == 1){
                 // Validez les données d'inscription (ajoutez des validations supplémentaires selon vos besoins)
                 // Enregistrez l'utilisateur dans la base de données
                 $eventModel = new Event();
@@ -198,7 +198,7 @@ class EventController
 
     private function handleParticipantAction($id, $action)
 {
-    if (isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
+    if (isset($_SESSION['logged']) && $_SESSION['logged'] == true && $_SESSION['user']['validated'] == 1) {
         $eventModel = new Event();
 
         // Assurez-vous que l'utilisateur est connecté et que userNumber est disponible

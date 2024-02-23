@@ -60,7 +60,7 @@ class IndexController
             $objet = $_POST['objet'] ?? '';
             $message = $_POST['message'] ?? '';
 
-            if(isset($_SESSION['logged']) && $_SESSION['logged'] == true){
+            if(isset($_SESSION['logged']) && $_SESSION['logged'] == true && $_SESSION['user']['validated'] == 1){
                 
                 $content = '
                     <html lang="en">
