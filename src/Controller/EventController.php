@@ -207,13 +207,21 @@ class EventController
         } else {
             // Gérez le cas où userNumber n'est pas disponible
             // Vous pouvez rediriger l'utilisateur vers une page d'erreur par exemple
-            header('Location: /error');
+            header('Location: /home');
             exit;
         }
 
         switch ($action) {
             case 'add':
                 $eventModel->addParticipant($id);
+                    //envoi du mail
+                    $eventModel = new Event();
+                    $e = $eventModel->getEventById($id);
+                    $userModel = new User();
+                    $user = $userModel->getUserById($_SESSION['user']['userNumber']);
+                    $mailer = new MailController();
+                    $mailer->sendMail('mathis.enrici@gmail.com', 'BEEDE', $user['email'], $user['firstName'] . ' ' . $user['lastName'], 'Inscription evenement', 'Bonjour votre inscription a ' . $e['name'] . ' est confirmee');
+
                 break;
             case 'remove':
                 $eventModel->deleteParticipant($id);
