@@ -247,6 +247,7 @@ class EventController
     {
         $this->notifParticipants();
         $this->notifCreator();
+        return "ok";
     }
 
     public function notifParticipants(){
