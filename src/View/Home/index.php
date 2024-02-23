@@ -36,7 +36,7 @@
             <img src="img/logo.png" class="logo">
             <div class="listMenu">
                 <ul>
-                    <?php if(isset($_SESSION['logged']) && $_SESSION['logged'] == true): ?>
+                    <?php if(isset($_SESSION['logged']) && $_SESSION['logged'] == true && $_SESSION['user']['validated'] == 1): ?>
                         <li><a href="/profil"><button class="btn border"><?php echo $_SESSION['user']['firstName'] . " " . $_SESSION['user']['lastName'] ?></button></a></li>
                         <li><a href="/logout"><button class="btn border">Se déconnecter</button></a></li>
                         <?php if($_SESSION['user']['role'] == "Admin"): ?>
@@ -138,7 +138,6 @@
                 </ul>
                 <a href="/events"><button class="btn border btnEvent">Voir tous nos évènements</button></a>
             </div>
-               
         </section>
 
     </main>
@@ -146,7 +145,7 @@
     <footer class="d-flex align-items-center justify-content-center">
         <div class="row container d-flex align-items-center justify-content-center">
             <div class="col-lg-6 col-md-12 px-5">Sciences-U Lyon</div>
-            <div class="col-lg-6 col-md-12 px-5"><a href="/contact">Nous Contacter</a></div>
+            <div class="col-lg-6 col-md-12 px-5 border-b-2"><a href="/contact">Nous Contacter</a></div>
             <div class="col-lg-6 col-md-12 px-5">53 Cr Albert Thomas, 69003 Lyon</div>
             <div class="col-lg-6 col-md-12 px-5">Sciences-u-lyon.fr</div>
         </div>

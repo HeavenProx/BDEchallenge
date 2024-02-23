@@ -7,10 +7,10 @@ use App\Model\Event;
 
 class IndexController
 {
+    // Charge la page Home qui est la page d'accueil    
+    // Permet de charger les 3 évènements les plus récents pour la partie "Nos évènements"
     public function home(): string
     {   
-        // Permet de charger les 3 évènements les plus récents pour la partie "Nos évènements"
-
         $event = new Event();
         $allEvents = $event->getAllEvents();
 
@@ -41,27 +41,27 @@ class IndexController
         return $content;
     }
 
+    // Affiche la page contact
     public function contact(): string
     {
         // Afficher la page et le formulaire de contact
-
         ob_start();
         require 'src/View/Contact/index.php';
         $content = ob_get_clean();
         return $content;
     }
 
+    // Permet d'envoyer un mail avec le mail utilisateur au mail de Mathis 
     public function send() 
     {
-        // Permet d'envoyer un mail avec le mail utilisateur au mail de Mathis 
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Récupérez les données du formulaire d'inscription
             $objet = $_POST['objet'] ?? '';
             $message = $_POST['message'] ?? '';
 
-            if(isset($_SESSION['logged']) && $_SESSION['logged'] == true){
+            if(isset($_SESSION['logged']) && $_SESSION['logged'] == true && $_SESSION['user']['validated'] == 1){
                 
+                // Construction du mail
                 $content = '
                     <html lang="en">
                     <head>

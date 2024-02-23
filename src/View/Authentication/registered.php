@@ -38,10 +38,10 @@
         }
     </style>
 </head>
-<body>
+<body class="container mx-auto">
     <a href="/" class="bg-yellow-500 text-right text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block my-4 mx-5">Accueil</a>
 
-    <h2 class="text-2xl font-bold mb-4 mx-5">Votre inscription est validée ! Veuillez confirmer votre adresse mail en cliquand sur le lien reçu dans votre boîte mail</h2>
+    <h2 class="text-2xl font-bold mb-4 mx-5">Votre inscription est validée ! Veuillez confirmer votre adresse mail en cliquand sur le lien reçu dans votre boîte mail pour vous connecter</h2>
 
 </body>
 </html>
