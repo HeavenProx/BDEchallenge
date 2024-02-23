@@ -39,12 +39,19 @@ class User extends BaseModel
 
     public function deleteUser($userId)
     {
-        // Mettez en œuvre la logique pour supprimer l'utilisateur de la base de données
+        $userId = is_array($userId) ? reset($userId) : $userId;        // Supprimez d'abord les participants de la table event_participants
+        $stmtParticipants = $this->db->prepare("DELETE FROM event_participants WHERE userNumber = ?");
+        $stmtParticipants->execute([$userId]);
+        $stmtwishlist = $this->db->prepare("DELETE FROM wishlist WHERE userNumber = ?");
+        $stmtwishlist->execute([$userId]);
+        $stmtevent = $this->db->prepare("DELETE FROM event WHERE userNumber = ?");
+        $stmtevent->execute([$userId]);
+
         $stmt = $this->db->prepare("DELETE FROM User WHERE userNumber = ?");
         if (!$stmt) {
             die("Error in DELETE statement: " . print_r($this->db->errorInfo(), true));
         }
-        $userId = is_array($userId) ? reset($userId) : $userId;
+        
 
         $stmt->execute([$userId]);
     }

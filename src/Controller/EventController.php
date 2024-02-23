@@ -23,7 +23,8 @@ class EventController
         usort($allEvents, function($a, $b) {
             return strtotime($a['eventDate']) - strtotime($b['eventDate']);
         });
-        // var_dump($allEvents);
+
+        // Filtre les elements suivant les categories et la date
         $eventsToCome = [];
         foreach ($allEvents as $e) {
             if(isset($_GET['category']) && isset($_GET['date'])){
@@ -70,7 +71,7 @@ class EventController
         // Parcourir les événements pour déterminer quels boutons afficher
         foreach ($events as $ev) {
             $participants = $event->getParticipants($ev['eventNumber']);
-            if(isset($_SESSION['logged']) && $_SESSION['logged'] == true){
+            if(isset($_SESSION['logged']) && $_SESSION['logged'] == true && $_SESSION['user']['validated'] == 1){
                 $isParticipant = in_array($_SESSION['user']['userNumber'], $participants);
                 $isInWishlist = $userModel->isInWishlist($ev['eventNumber']);
                 // Stockez l'information pour chaque événement
@@ -79,11 +80,11 @@ class EventController
             }
         }
 
-        // Incluez les events dans la vue
+        // Envoyer a la page des events
         $viewPath = __DIR__ . '/../View/Event/index.php';
-        ob_start();  // Démarre la temporisation de sortie
-        include $viewPath;  // Inclut la vue
-        $viewContent = ob_get_clean();  // Récupère le contenu de la temporisation de sortie et l'efface
+        ob_start();  
+        include $viewPath; 
+        $viewContent = ob_get_clean();  
 
         return $viewContent;
     }
@@ -106,7 +107,7 @@ class EventController
         exit;
     }
 
-    // Acceder ou non a la page des events
+    // Acceder a la page des events
     public function create(){
         if(isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'BDE'){
             ob_start();
@@ -130,9 +131,9 @@ class EventController
             $location = $_POST['location'] ?? '';
             $description = $_POST['description'] ?? '';
 
-            if(isset($_SESSION['logged']) && $_SESSION['logged'] == true){
-
-                // Envoie de la requete
+            if(isset($_SESSION['logged']) && $_SESSION['logged'] == true && $_SESSION['user']['validated'] == 1){
+                // Validez les données d'inscription (ajoutez des validations supplémentaires selon vos besoins)
+                // Enregistrez l'utilisateur dans la base de données
                 $eventModel = new Event();
                 $eventModel->createEvent($name, $category, $eventDate, $location, $description, $_SESSION['user']['userNumber']);
 
@@ -206,9 +207,9 @@ class EventController
 
     // Gere l'ajout ou la suppression d'un participation en fonction de l'action
     private function handleParticipantAction($id, $action)
-    {
-        if (isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
-            $eventModel = new Event();
+{
+    if (isset($_SESSION['logged']) && $_SESSION['logged'] == true && $_SESSION['user']['validated'] == 1) {
+        $eventModel = new Event();
 
             // Assurez-vous que l'utilisateur est connecté et que userNumber est disponible
             if (isset($_SESSION['user']['userNumber'])) {
@@ -258,8 +259,10 @@ class EventController
     {
         $this->notifParticipants();
         $this->notifCreator();
+        return "ok";
     }
 
+    // Envoie un mail au participant 1 jour avant l'evenement
     public function notifParticipants(){
         $event = new Event();
         $allEvents = $event->getAllEvents();
@@ -269,6 +272,7 @@ class EventController
             $date_a_verifier = $e['eventDate'];
             $date_a_verifier = new DateTime($date_a_verifier);
 
+            // Verifie la date et envoie les mails
             if($date_demain->diff($date_a_verifier)->days == 0){
                 $participantsId = $event->getParticipants($e['eventNumber']);
                 foreach ($participantsId as $p) {
@@ -288,14 +292,12 @@ class EventController
         $event = new Event();
         $allEvents = $event->getAllEvents();
 
+        // Envoie un mail au createur si il n'y a personne d'inscrit 5 jours avant
         foreach ($allEvents as $e) {
             $date_5 = new DateTime('+4 day');
             $date_a_verifier = $e['eventDate'];
             $date_a_verifier = new DateTime($date_a_verifier);
             $nbParticipants = $event->getParticipants($e['eventNumber']);
-            //var_dump($e['name']);
-            //var_dump($date_5->diff($date_a_verifier)->days == 0);
-            //var_dump($date_5->diff($date_a_verifier)->days);
             if($date_5->diff($date_a_verifier)->days == 0 && $nbParticipants == []){
                 $user = new User();
                 $participantId = $e['userNumber'];
@@ -311,6 +313,7 @@ class EventController
     // Affiche la page de detail d'un evenement
     public function details($id){
 
+        // Affiche la page de details en fonction de l'user
         $eventModel = new Event();
         $event = $eventModel->getEventById($id);
 

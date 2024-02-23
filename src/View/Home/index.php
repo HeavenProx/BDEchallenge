@@ -36,7 +36,7 @@
             <img src="img/logo.png" class="logo">
             <div class="listMenu">
                 <ul>
-                    <?php if(isset($_SESSION['logged']) && $_SESSION['logged'] == true): ?>
+                    <?php if(isset($_SESSION['logged']) && $_SESSION['logged'] == true && $_SESSION['user']['validated'] == 1): ?>
                         <li><a href="/profil"><button class="btn border"><?php echo $_SESSION['user']['firstName'] . " " . $_SESSION['user']['lastName'] ?></button></a></li>
                         <li><a href="/logout"><button class="btn border">Se déconnecter</button></a></li>
                         <?php if($_SESSION['user']['role'] == "Admin"): ?>
@@ -138,7 +138,6 @@
                 </ul>
                 <a href="/events"><button class="btn border btnEvent">Voir tous nos évènements</button></a>
             </div>
-               
         </section>
 
     </main>

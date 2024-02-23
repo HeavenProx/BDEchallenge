@@ -40,14 +40,21 @@ class Event extends BaseModel
     
     public function deleteEvent($eventId)
     {
-        // Mettez en œuvre la logique pour supprimer l'utilisateur de la base de données
-        $stmt = $this->db->prepare("DELETE FROM Event WHERE eventNumber = ?");
-        if (!$stmt) {
+        $eventId = is_array($eventId) ? reset($eventId) : $eventId;
+        // Supprimez d'abord les participants de la table event_participants
+        $stmtParticipants = $this->db->prepare("DELETE FROM event_participants WHERE eventNumber = ?");
+        $stmtParticipants->execute([$eventId]);
+        $stmtwishlist = $this->db->prepare("DELETE FROM wishlist WHERE eventNumber = ?");
+        $stmtwishlist->execute([$eventId]);
+
+        // Ensuite, supprimez l'événement de la table event
+        $stmtEvent = $this->db->prepare("DELETE FROM Event WHERE eventNumber = ?");
+        if (!$stmtEvent) {
             die("Error in DELETE statement: " . print_r($this->db->errorInfo(), true));
         }
-        $eventId = is_array($eventId) ? reset($eventId) : $eventId;
 
-        $stmt->execute([$eventId]);
+
+        $stmtEvent->execute([$eventId]);
     }
 
     public function getEventById($eventId)

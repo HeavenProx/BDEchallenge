@@ -48,7 +48,7 @@
                 </div>
             </div>
             
-                <?php if (isset($_SESSION['logged']) && $_SESSION['logged'] == true): ?>
+                <?php if (isset($_SESSION['logged']) && $_SESSION['logged'] == true && $_SESSION['user']['validated'] == 1): ?>
                     <?php if($_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'BDE'): ?>
                         <div class="flex justify-end">
                             <a href="/event/create" class="bg-yellow-500 text-blue-900 hover:bg-blue-900 hover:text-white transition px-6 py-3 rounded-md cursor-pointer inline-block mt-4 ml-4 w-52">Ajouter un évènement</a>
@@ -89,13 +89,13 @@
                 <li class="bg-white p-4 rounded shadow"> 
                 <p class="text-xl font-bold mb-2 text-gray-800"><a href="/event/details/<?php echo $event['eventNumber']; ?>" class="border-black border-b-2"><?php echo $event['name'] . ' - ' . $event['eventDate']; ?></a></p>
                 <p class="text-lg text-gray-500 mb-2"><?php echo $event['category'] . ' à ' . $event['location']; ?></p>
-                    <?php if(isset($_SESSION['logged']) && $_SESSION['logged'] == true): ?>
+                    <?php if(isset($_SESSION['logged']) && $_SESSION['logged'] == true && $_SESSION['user']['validated'] == 1): ?>
                         <?php if ($_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'BDE'): ?>
                             <a href="/event/edit/<?php echo $event['eventNumber']; ?>" class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Modifier</a>
                             <a href="/event/delete/<?php echo $event['eventNumber']; ?>" onclick="return confirm('Are you sure?')" class="bg-red-900 text-white hover:bg-blue-500 hover:text-white transition px-8 py-2 rounded-md cursor-pointer inline-block mt-4">Supprimer</a>
                         <?php endif; ?>
                     <?php endif; ?>
-                    <?php if(isset($_SESSION['logged']) && $_SESSION['logged'] == true): ?>
+                    <?php if(isset($_SESSION['logged']) && $_SESSION['logged'] == true && $_SESSION['user']['validated'] == 1): ?>
                         <?php if (!$wishlistButtons[$event['eventNumber']]): ?>
                             <!-- Affiche le bouton "Ajouter aux Favoris" si l'événement n'est pas dans la wishlist -->
                             <a href="/wishlist/add/<?php echo $event['eventNumber']; ?>" class="bg-blue-900 text-white hover:bg-yellow-500 hover:text-blue-900 transition px-5 py-2 rounded-md cursor-pointer inline-block mt-4">Ajouter aux Favoris</a>
