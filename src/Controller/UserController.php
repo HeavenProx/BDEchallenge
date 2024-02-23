@@ -22,10 +22,9 @@ class UserController
         ob_start();  // Démarre la temporisation de sortie
         include $viewPath;  // Inclut la vue
         $viewContent = ob_get_clean();  // Récupère le contenu de la temporisation de sortie et l'efface
-
         return $viewContent;
         } else{
-            $_SESSION['error'] = "Vous ne pouvez pas accedé à cette page";
+            $_SESSION['error'] = "Vous ne pouvez pas acceder à cette page";
             header('Location: /');
         }
     }
@@ -33,6 +32,7 @@ class UserController
     // Envoie sur la page de creation de compte
     public function create()
     {
+        // Verifie si l'user est un admin
         if(isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'Admin'){
             ob_start();
             require 'src/View/User/register_form.php';
@@ -54,15 +54,13 @@ class UserController
             $lastName = $_POST['last_name'] ?? '';
             $password = $_POST['password'] ?? '';
             
-            // Validez les données d'inscription (ajoutez des validations supplémentaires selon vos besoins)
-            // Enregistrez l'utilisateur dans la base de données
+            // Envoie l'enregistrement de l'utilisateur dans la base de données
             $userModel = new User();
             $userModel->createUser($email, $firstName, $lastName, $password);
 
             header('Location: /users');
             exit;
         }
-     
         // Affichez le formulaire d'inscription
         echo 'Vous êtes bien inscrit !';
     }
@@ -99,11 +97,9 @@ class UserController
             $password = $_POST['password'] ?? '';
             $role = $_POST['role'] ?? '';
 
-            // var_dump($email, $firstName, $lastName, $password);
+            // Demande la suppression de l'user au model
             $userModel = new User();
-            // var_dump($userModel);
             $userModel->updateUser($id, $email, $firstName, $lastName, $password, $role);
-            // var_dump($userModel);
             header('Location: /users');
             exit;
         }
