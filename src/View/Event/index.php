@@ -44,7 +44,7 @@
                 </div>
                 <div class="flex gap-4 lg:text-xl">
                     <a href="/events" class="hover:text-yellow-500 transition">Nos Évènements</a>
-                    <a href="/contact" class="hover:text-yellow-500 transition">Nous Contactez</a>
+                    <a href="/contact" class="hover:text-yellow-500 transition">Contact</a>
                 </div>
             </div>
             

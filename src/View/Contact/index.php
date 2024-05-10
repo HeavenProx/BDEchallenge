@@ -53,7 +53,7 @@
         <input type="text" id="objet" name="objet" required class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
 
         <label for="message" class="block mb-2 text-blue-900">Message :</label>
-        <input type="textarea" id="message" name="message" required class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
+        <input type="textarea" id="message" name="message" row="10" required class="text-blue-900 w-full px-4 py-2 mb-4 border rounded-md">
 
         <?php 
             if (isset($_SESSION['error'])): 
