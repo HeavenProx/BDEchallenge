@@ -7,9 +7,9 @@ use App\Controller\MailController;
 
 class AuthenticationController {
 
+    // Charger le contenu de la vue register_form.php
     public function register()
     {
-        // Charger le contenu de la vue register_form.php
         $viewPath = __DIR__ . '/../View/Authentication/register_form.php';
         $viewContent = file_get_contents($viewPath);
     
@@ -17,6 +17,7 @@ class AuthenticationController {
         return $viewContent;
     }
 
+    // Charger le contenu de la vue login_form.php
     public function login()
     {
         // Charger le contenu de la vue login_form.php
@@ -29,6 +30,8 @@ class AuthenticationController {
 
     }
 
+    // Gere si l'user est inscrit ou mdp incorrect
+    // Si c'est bon : attribue les variables de session user et logged
     public function checklogs() {
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -58,6 +61,7 @@ class AuthenticationController {
         }
     }
 
+    // Inscrit un nouvel utilisateur et lui envoie un mail de validation
     public function registered()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -91,11 +95,11 @@ class AuthenticationController {
         $id = $userModel->getUserId($_POST['email']);
         $contentWithId = str_replace('CURRENT_ID', strval(reset($id)), $content);
         
-        //Send a confirmation mail
+        // Envoie l'email de confirmation
         $mailController = new MailController();
         $mailController->sendMail('mathis.enrici@gmail.com', 'BEEDE', $_POST['email'], $_POST['first_name'] . $_POST['last_name'], 'Confirmation de compte', $contentWithId);
 
-
+        // Redirige le nouvel utilisaeur sur la page de confirmation
         $viewPath = __DIR__ . '/../View/Authentication/registered.php';
         $viewContent = file_get_contents($viewPath);
         return $viewContent;
@@ -116,6 +120,7 @@ class AuthenticationController {
         return $viewContent;
     }
 
+    // Deconnecte l'utilisateur, ecrase ses variables de session et le redirige a l'accueil
     public function logout()
     {
         $_SESSION['logged'] = false;

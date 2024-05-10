@@ -6,6 +6,7 @@ use App\Model\Profil;
 
 class ProfilController
 {
+    // Affiche la page du profil
     public function profil()
     {
         ob_start();
@@ -14,6 +15,7 @@ class ProfilController
         return $content;
     }
 
+    // Prepare la requete pour la modification des donnees de l'utilisateur
     public function update($id)
     {
         // Récupére les données 
@@ -37,9 +39,9 @@ class ProfilController
         exit;
     }
 
+    // Fait la requete de suppression de l'utilisateur en base de données
     public function delete($id)
     {
-        // Envoie au model pour faire la requete de suppression de l'utilisateur en la base de données
         $userModel = new Profil();
         $userModel->deleteProfil($id);
 

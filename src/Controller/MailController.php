@@ -25,9 +25,9 @@ class MailController
     return $phpmailer;
     }
 
+    // Prepare l'envoie du mail
     public function sendMail($emailFrom, $nameFrom, $emailTo, $nameTo, $subject, $body)
     {
-        // Envoyer un e-mail
         $phpmailer = $this->getPhpMailer();
         try{
             $phpmailer->setFrom($emailFrom, $nameFrom);

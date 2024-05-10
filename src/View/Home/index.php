@@ -145,7 +145,7 @@
     <footer class="d-flex align-items-center justify-content-center">
         <div class="row container d-flex align-items-center justify-content-center">
             <div class="col-lg-6 col-md-12 px-5">Sciences-U Lyon</div>
-            <div class="col-lg-6 col-md-12 px-5"><a href="/contact">Nous Contacter</a></div>
+            <div class="col-lg-6 col-md-12 px-5 border-b-2"><a href="/contact">Nous Contacter</a></div>
             <div class="col-lg-6 col-md-12 px-5">53 Cr Albert Thomas, 69003 Lyon</div>
             <div class="col-lg-6 col-md-12 px-5">Sciences-u-lyon.fr</div>
         </div>
