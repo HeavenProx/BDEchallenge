@@ -2,7 +2,7 @@
 
 require_once 'src/Model/Database/DbConnection.php';
 
-use EsgiIw\TpDesignPattern\Model\Database\DbConnection;
+use App\Model\Database\DbConnection;
 
 $dbConnection = DbConnection::getInstance();
 $pdo = $dbConnection->getConnection();

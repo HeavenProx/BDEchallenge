@@ -1,6 +1,6 @@
 <?php
 
-namespace EsgiIw\TpDesignPattern\Model\Database;
+namespace App\Model\Database;
 
 use PDO;
 
